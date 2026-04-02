@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VIGOR FITNESS CLUB | FORGE YOUR STRENGTH</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Oswald:wght@300;400;700&amp;family=Inter:wght@300;400;700;900&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .grain-overlay {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.04;
+        }
+        .text-watermark {
+            -webkit-text-stroke: 1px rgba(245, 166, 35, 0.1);
+            color: transparent;
+        }
+        .masonry-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-track { background: #0A0A0A; }
+        ::-webkit-scrollbar-thumb { background: #F5A623; }
+        .sharp-edge { border-radius: 0px !important; }
+        .transition-brutal { transition: all 400ms cubic-bezier(0.16, 1, 0.3, 1); }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "secondary-fixed": "#ffddb4",
+                "inverse-on-surface": "#313030",
+                "surface-dim": "#131313",
+                "primary-fixed-dim": "#ffb955",
+                "surface-container-lowest": "#0e0e0e",
+                "inverse-primary": "#835500",
+                "on-tertiary-container": "#004d6a",
+                "secondary-fixed-dim": "#ecbf85",
+                "on-surface": "#e5e2e1",
+                "secondary-container": "#5f4112",
+                "surface-bright": "#3a3939",
+                "on-error": "#690005",
+                "surface": "#131313",
+                "on-tertiary": "#00344a",
+                "tertiary-fixed": "#c4e7ff",
+                "error": "#ffb4ab",
+                "on-tertiary-fixed-variant": "#004c69",
+                "surface-container-highest": "#353534",
+                "primary": "#ffc880",
+                "on-primary-container": "#644000",
+                "primary-container": "#f5a623",
+                "on-secondary-container": "#d9ae75",
+                "tertiary": "#9bd9ff",
+                "on-error-container": "#ffdad6",
+                "surface-container-high": "#2a2a2a",
+                "inverse-surface": "#e5e2e1",
+                "primary-fixed": "#ffddb4",
+                "secondary": "#ecbf85",
+                "background": "#131313",
+                "on-primary-fixed": "#291800",
+                "on-secondary-fixed-variant": "#5f4112",
+                "tertiary-fixed-dim": "#7cd0ff",
+                "surface-tint": "#ffb955",
+                "on-secondary": "#452b00",
+                "surface-container-low": "#1c1b1b",
+                "on-surface-variant": "#d7c3ae",
+                "on-primary": "#452b00",
+                "on-primary-fixed-variant": "#633f00",
+                "on-secondary-fixed": "#291800",
+                "outline": "#9f8e7a",
+                "surface-container": "#201f1f",
+                "on-background": "#e5e2e1",
+                "outline-variant": "#524534",
+                "tertiary-container": "#3ac2ff",
+                "on-tertiary-fixed": "#001e2c",
+                "surface-variant": "#353534",
+                "error-container": "#93000a"
+              },
+              fontFamily: {
+                "headline": ["Oswald"],
+                "display": ["Bebas Neue"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+              },
+              borderRadius: {"DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-surface-container-lowest text-on-surface font-body overflow-x-hidden">
+<div class="fixed inset-0 pointer-events-none grain-overlay z-[9999]"></div>
+<!-- Navigation -->
+<nav class="fixed top-0 w-full z-50 bg-neutral-950/70 backdrop-blur-xl flex justify-between items-center px-10 py-6 w-full max-w-full mx-auto">
+<div class="flex items-center gap-3">
+<img alt="VIGOR" class="w-10 h-10 object-contain" data-alt="minimalist gold geometric emblem for an elite fitness brand on a transparent dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHJUPWohyiIYLbGeO1ca-Z4yYWjqLqtnaxoOCzSngv7Yqj94GiotH_WhjzW5H2ZBqWtpRxf5oe3GKmGJKBPLTnF1rzsqt8FNKwgQssuRsDVQ8-TPVaFWZ3P5ZMb7dQXiRtVdFsSxNNTOjg8nfEmDMDY-Tfe57Cjr-9htzfGdWNMv92P-juI10PMB1zOsscI_YGILtTND0-xLs9jeWfCgiUimlr2oQFA0aNl5tHP5kDAlA4HFLYmsztjwA2WrIn0tjTUCXPdONV_V0"/>
+<span class="text-3xl font-black tracking-tighter text-amber-500 font-['Bebas_Neue'] uppercase">VIGOR</span>
+</div>
+<div class="hidden lg:flex items-center gap-10 font-['Oswald'] text-[11px] tracking-[0.2em] uppercase font-light">
+<a class="text-amber-500 border-b-2 border-amber-500 pb-1" href="#">PROGRAMS</a>
+<a class="text-neutral-400 hover:text-white transition-colors" href="#">FACILITIES</a>
+<a class="text-neutral-400 hover:text-white transition-colors" href="#">MEMBERSHIP</a>
+<a class="text-neutral-400 hover:text-white transition-colors" href="#">COACHES</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-[11px] font-['Oswald'] tracking-[0.2em] uppercase hover:text-primary transition-colors">CLIENT LOGIN</button>
+<button class="bg-primary-container text-on-primary px-8 py-3 text-[11px] font-bold tracking-[0.2em] uppercase hover:brightness-110 transition-brutal active:scale-95">ENQUIRE NOW</button>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="relative h-screen w-full flex items-center overflow-hidden bg-neutral-950">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-60" data-alt="dramatic wide shot of high-end industrial gym interior with a focused athlete and atmospheric moody lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAha-Ml8ZhCgr3XPilCwWhDA3As5DMRmA2YdNiBGb8TB6BCU0xpUaLIC3-X7zezvsdKBxXQHxk-FIk62TLU14TQIRVCi1ACLJ0Ea_zghqQzlHOP0fcFwqaN4_0SUTOBAI2ja2wcKevW_BiUF-JiTNAvs9uhvIYcn3fcyhKyyen9sLhSixKoZQZ54WJmDc_yKcjQSdlhi2MV_Ac6f8JuQ4sLdpLUPo2iyh10uwbTM07fF0pZ7Wd6PTEQadfqILGWl2D0mjIduF7IVs"/>
+<div class="absolute inset-0 bg-gradient-to-r from-neutral-950 via-neutral-950/40 to-transparent"></div>
+</div>
+<div class="absolute inset-0 flex items-center justify-center opacity-[0.03] select-none">
+<h2 class="font-display text-[40vw] leading-none tracking-tighter text-primary">VIGOR</h2>
+</div>
+<div class="relative z-10 px-10 md:px-24 max-w-5xl">
+<h1 class="font-display text-[120px] leading-[0.85] tracking-tighter mb-8 animate-fade-in">
+                FORGE YOUR<br/><span class="text-primary-container">STRENGTH</span>
+</h1>
+<div class="flex gap-4">
+<button class="bg-primary-container text-on-primary px-12 py-5 font-headline font-bold tracking-widest uppercase text-sm hover:scale-105 transition-brutal">EXPLORE PACKAGES</button>
+<button class="border border-outline-variant/40 hover:border-primary text-on-surface px-12 py-5 font-headline font-bold tracking-widest uppercase text-sm transition-brutal">BOOK FREE TRIAL</button>
+</div>
+</div>
+<!-- Stats Bar -->
+<div class="absolute bottom-0 left-0 w-full bg-surface-container h-32 flex items-center border-t border-white/5">
+<div class="grid grid-cols-3 w-full max-w-7xl mx-auto px-10">
+<div class="flex items-center gap-6">
+<span class="font-display text-6xl text-primary-container leading-none">500+</span>
+<span class="font-headline text-xs tracking-widest text-on-surface-variant uppercase">ELITE<br/>MEMBERS</span>
+</div>
+<div class="flex items-center gap-6 border-x border-white/5 px-10">
+<span class="font-display text-6xl text-primary-container leading-none">10+</span>
+<span class="font-headline text-xs tracking-widest text-on-surface-variant uppercase">EXPERT<br/>TRAINERS</span>
+</div>
+<div class="flex items-center gap-6 pl-10">
+<span class="font-display text-6xl text-primary-container leading-none">5★</span>
+<span class="font-headline text-xs tracking-widest text-on-surface-variant uppercase">GOOGLE<br/>RATED</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Quick Access Grid -->
+<section class="py-24 bg-surface-container-lowest px-10">
+<h2 class="font-headline text-4xl tracking-tighter uppercase mb-16 opacity-20">COMMAND CENTER</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+<!-- Glass Cards -->
+<script>
+                const icons = [
+                    {n: 'Enquiry', i: 'mail'}, {n: 'Login', i: 'login'}, {n: 'Book Class', i: 'calendar_month'},
+                    {n: 'Book PT', i: 'fitness_center'}, {n: 'Packages', i: 'inventory_2'}, {n: 'Offers', i: 'local_offer'},
+                    {n: 'Gallery', i: 'photo_library'}, {n: 'Trainers', i: 'groups'}, {n: 'Reviews', i: 'star'},
+                    {n: 'Feedback', i: 'rate_review'}, {n: 'PAR-Q', i: 'assignment'}, {n: 'PT Contract', i: 'contract'},
+                    {n: 'Trial Waiver', i: 'verified_user'}
+                ];
+                document.write(icons.map(item => `
+                    <div class="bg-white/[0.03] hover:bg-primary/10 border border-white/5 p-6 aspect-square flex flex-col items-center justify-center gap-4 transition-brutal group cursor-pointer">
+                        <span class="material-symbols-outlined text-3xl group-hover:text-primary transition-brutal">${item.i}</span>
+                        <span class="font-headline text-[10px] tracking-widest uppercase text-center">${item.n}</span>
+                    </div>
+                `).join(''));
+            </script>
+</div>
+</section>
+<!-- Packages Section -->
+<section class="py-32 relative overflow-hidden px-10 bg-surface-container">
+<div class="absolute top-0 right-0 opacity-5 select-none translate-y-1/4">
+<span class="font-display text-[30vw] leading-none text-primary">ELITE</span>
+</div>
+<div class="max-w-7xl mx-auto relative z-10">
+<div class="flex justify-between items-end mb-20">
+<div>
+<p class="text-primary font-headline tracking-[0.3em] uppercase text-xs mb-4">MEMBERSHIP TIERS</p>
+<h2 class="font-headline text-6xl tracking-tight uppercase">SELECT YOUR VIGOR</h2>
+</div>
+</div>
+<div class="grid lg:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="bg-neutral-900 p-12 relative overflow-hidden group">
+<span class="absolute -right-8 -bottom-10 font-display text-9xl text-white/5 select-none">2999</span>
+<h3 class="font-headline text-2xl mb-2">BASE</h3>
+<div class="text-primary text-5xl font-display mb-8">₹2999<span class="text-sm font-body text-on-surface-variant">/mo</span></div>
+<ul class="space-y-4 mb-12 text-sm text-on-surface-variant font-light">
+<li>Global Access (Limited)</li>
+<li>Standard Gym Equipment</li>
+<li>Locker Room Access</li>
+<li>VIGOR App Integration</li>
+</ul>
+<button class="w-full border border-white/10 py-4 font-headline uppercase tracking-widest group-hover:bg-white group-hover:text-black transition-brutal">SELECT PLAN</button>
+</div>
+<!-- Card 2 (Featured) -->
+<div class="bg-neutral-800 p-12 relative overflow-hidden border-t-2 border-primary group">
+<div class="absolute top-0 left-1/2 -translate-x-1/2 bg-primary text-on-primary px-4 py-1 text-[10px] font-bold tracking-widest uppercase">MOST POPULAR</div>
+<span class="absolute -right-8 -bottom-10 font-display text-9xl text-white/5 select-none">7499</span>
+<h3 class="font-headline text-2xl mb-2">PRO</h3>
+<div class="text-primary text-5xl font-display mb-8">₹7499<span class="text-sm font-body text-on-surface-variant">/mo</span></div>
+<ul class="space-y-4 mb-12 text-sm text-on-surface-variant font-light">
+<li>Unlimited Global Access</li>
+<li>Weekly PT Consultation</li>
+<li>Recovery Zone Access</li>
+<li>Priority Class Booking</li>
+</ul>
+<button class="w-full bg-primary-container text-on-primary py-4 font-headline uppercase tracking-widest hover:brightness-110 transition-brutal">SELECT PLAN</button>
+</div>
+<!-- Card 3 -->
+<div class="bg-neutral-900 p-12 relative overflow-hidden group">
+<span class="absolute -right-8 -bottom-10 font-display text-9xl text-white/5 select-none">24999</span>
+<h3 class="font-headline text-2xl mb-2">ELITE</h3>
+<div class="text-primary text-5xl font-display mb-8">₹24999<span class="text-sm font-body text-on-surface-variant">/mo</span></div>
+<ul class="space-y-4 mb-12 text-sm text-on-surface-variant font-light">
+<li>Dedicated Personal Trainer</li>
+<li>Private Studio Access</li>
+<li>Custom Nutrition Plan</li>
+<li>Valet &amp; Private Locker</li>
+</ul>
+<button class="w-full border border-white/10 py-4 font-headline uppercase tracking-widest group-hover:bg-white group-hover:text-black transition-brutal">SELECT PLAN</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Offers Section -->
+<section class="py-24 bg-surface-container-lowest overflow-hidden">
+<div class="flex gap-8 px-10 animate-scroll overflow-x-auto no-scrollbar">
+<div class="flex-shrink-0 w-80 h-48 bg-surface-container-high relative p-8 group cursor-pointer overflow-hidden">
+<span class="absolute -right-4 top-0 font-display text-[120px] text-primary/10 select-none">40%</span>
+<p class="font-headline text-primary tracking-widest uppercase text-xs mb-2">ANNUAL OFFERS</p>
+<h4 class="font-headline text-2xl uppercase">FOUNDER'S<br/>LEGACY</h4>
+</div>
+<div class="flex-shrink-0 w-80 h-48 bg-surface-container-high relative p-8 group cursor-pointer overflow-hidden">
+<span class="absolute -right-4 top-0 font-display text-[120px] text-primary/10 select-none">25%</span>
+<p class="font-headline text-primary tracking-widest uppercase text-xs mb-2">CORPORATE</p>
+<h4 class="font-headline text-2xl uppercase">PEAK<br/>PERFORMANCE</h4>
+</div>
+<div class="flex-shrink-0 w-80 h-48 bg-surface-container-high relative p-8 group cursor-pointer overflow-hidden">
+<span class="absolute -right-4 top-0 font-display text-[120px] text-primary/10 select-none">15%</span>
+<p class="font-headline text-primary tracking-widest uppercase text-xs mb-2">REFERRAL</p>
+<h4 class="font-headline text-2xl uppercase">SQUAD<br/>STRENGTH</h4>
+</div>
+</div>
+</section>
+<!-- Trainers Section -->
+<section class="py-32 px-10 bg-surface-container-lowest">
+<h2 class="font-headline text-6xl tracking-tighter uppercase mb-20 text-center">MASTER COACHES</h2>
+<div class="grid lg:grid-cols-4 gap-px bg-white/5 border border-white/5">
+<div class="relative aspect-[3/4] overflow-hidden group">
+<img class="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700" data-alt="monochrome intense portrait of a male fitness coach transitioning to color on hover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUmMbmRwfvwQrbara02NEd5qfVKU84yB8xOMvwGmg-aNCy0MUMcecL3kR3iWgyfmGTbGVH3ra8X6xt-o4QXhw8GvWReT5ERFq0y3jvQDOGaEtuUrCVV1N5JcXS5Re3fl5CCl9YscqE8hVCCCJ5KNKvPYt1pQVi8PdwpoWXSw9soE05tg3BJYL6XLgMMqXcB0MG_dotowSQ-XpQyQF2_26MxNBSWCzaZ425UCdzPz4hVIDdfxmFyRggKrzcibqD4rGbcMBtpkECdA8"/>
+<div class="absolute inset-0 border-[10px] border-primary opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none"></div>
+<div class="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-black to-transparent">
+<p class="font-headline text-primary text-xs tracking-widest uppercase mb-1">STRENGTH</p>
+<h3 class="font-headline text-2xl uppercase">MARCUS VAULT</h3>
+</div>
+</div>
+<div class="relative aspect-[3/4] overflow-hidden group">
+<img class="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700" data-alt="monochrome intense portrait of a female fitness coach transitioning to color on hover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlJqFov_2ugRkNcSZeus5QCmYBjD6e29xfeZqTvBNRiFEHupCrtPO80bfXRWeM522NQOzEdbqUD46B7uowOsEfOrTHcNNsKbChVPn7OnRMlmv6XAIJReVDBNffb1sw4DXsaw_kwvFQs8kXvlJy2XL4wbz6BxULS__p_BMEDROmmldzp-V4CLoNoqdNMeAhIOyar6vZleb8_qBvEX02STFZcTH54l9VgnJlJZTmn0HyVIPOIqG3Vl2YZ49EDntpCiPdX2UyDoTu5ZU"/>
+<div class="absolute inset-0 border-[10px] border-primary opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none"></div>
+<div class="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-black to-transparent">
+<p class="font-headline text-primary text-xs tracking-widest uppercase mb-1">ENDURANCE</p>
+<h3 class="font-headline text-2xl uppercase">SARA KINETIC</h3>
+</div>
+</div>
+<div class="relative aspect-[3/4] overflow-hidden group">
+<img class="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700" data-alt="monochrome intense portrait of a lead bodybuilding coach transitioning to color on hover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqXEB4wowQXIhvNlNEC_Fxefk1k3brdAe2B3n7T8CFPJE2V8ZnJ5XFg1hggM-xCM84WJGYO2YQedXUL8TDIeiyGPU9PshP4MiAHX2FXhs62B-8MOb9iHjmhEZ_dxwa86b34MtmLmGW-KGFQnQm09UdCAQALb5hNmVPNHxjZRHft-lTkWBshPps_O1p7TPNoAAZmKUXe297EXqZGfIQMl4cyCYVi7ji51ZlR7_OMHrTFzvIoYan7RdIADMX28ld17Pd6vhcAjvBQP4"/>
+<div class="absolute inset-0 border-[10px] border-primary opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none"></div>
+<div class="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-black to-transparent">
+<p class="font-headline text-primary text-xs tracking-widest uppercase mb-1">HYPERTROPHY</p>
+<h3 class="font-headline text-2xl uppercase">ALEX IRON</h3>
+</div>
+</div>
+<div class="relative aspect-[3/4] overflow-hidden group">
+<img class="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700" data-alt="monochrome intense portrait of a mobility coach transitioning to color on hover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTalsQ53zAfslX_65wOHjVpdpCk0v7qQX8DLTPVfdAWTapbZUCJ5QyZE2RfsbcLzgvlbulS9T95et35qp9OrDRZm5JFMUZvcG_kLjN9B7gVK04rg_hkFnu2yhcQoUCZb6V3Cq-fSENpA1AnBG6d5VgII1rQU9sZLBotqVDdyWTVPnNRI5D92jpX-OrumkMrLc4aRe2DLM9ThVPHQwBAKrfCWqaQjDV6p0YdVy8KPdiRQX3Pw1sEYzRqeKPVtghPK7cSEtcvVNunfk"/>
+<div class="absolute inset-0 border-[10px] border-primary opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none"></div>
+<div class="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-black to-transparent">
+<p class="font-headline text-primary text-xs tracking-widest uppercase mb-1">MOBILITY</p>
+<h3 class="font-headline text-2xl uppercase">ELENA FLOW</h3>
+</div>
+</div>
+</div>
+</section>
+<!-- Reviews Section -->
+<section class="py-32 bg-surface-container-lowest relative overflow-hidden">
+<div class="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none">
+<span class="font-display text-[25vw] leading-none text-white tracking-tighter">REVIEWS</span>
+</div>
+<div class="max-w-6xl mx-auto px-10 relative z-10">
+<div class="flex items-center gap-4 mb-16">
+<img class="w-10 h-10" data-alt="Google G logo in clean vector style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9CMXerU_nbZG0X9huWMJHqCiN072BzDuaGIhegm05bNuvUjMxf4UyRUDq4bKwx93HG-SNhFHM4K20WOYK91i9-oZTCoX5fKpVqc1iS5To3b8isSCtbmxFxgKBj6_F8z5nOzSQtHCRX9IwZ2bhn-FvAiXB61HQCicyKZ3zcWVmRC8cxz9a--McSWermRe8liCznfqUVDAuR-pSkmMuhLeikDCdGVTxd77NGAmHkPUtWsjTA7PU2l6RAQRC0OqmkU8zZ88gg0oUv2Y"/>
+<div class="h-px flex-1 bg-white/10"></div>
+</div>
+<div class="grid md:grid-cols-2 gap-12">
+<div class="bg-neutral-900 p-12 border-l-4 border-primary">
+<div class="flex gap-1 text-primary mb-6">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-headline text-2xl italic mb-8">"THE MOST UNCOMPROMISING TRAINING ENVIRONMENT I'VE EVER EXPERIENCED. VIGOR LIVES UP TO ITS NAME."</p>
+<p class="font-headline tracking-widest uppercase text-primary text-sm">— JAMES T. (PRO ATHLETE)</p>
+</div>
+<div class="bg-neutral-900 p-12 border-l-4 border-primary">
+<div class="flex gap-1 text-primary mb-6">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-headline text-2xl italic mb-8">"PREMIUM AMENITIES COUPLED WITH THE HIGHEST CALIBER OF COACHING. THE VAULT IS MY SECOND HOME."</p>
+<p class="font-headline tracking-widest uppercase text-primary text-sm">— SARAH L. (CEO)</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Gallery Section -->
+<section class="py-24 px-10 bg-surface-container-lowest">
+<div class="masonry-grid">
+<div class="relative overflow-hidden group aspect-square">
+<img class="w-full h-full object-cover transition-brutal group-hover:scale-105" data-alt="close up of heavy iron dumbbells on a rack in a moody industrial gym setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCR4VG0KPftHwWV3hD6BInV-Lusgk9oNoJyYzkq6Om-wsFVJb6iSq5FhPs7j9BOP57_tRU6TNkcSGHQts5pLn77EHRAVpcn3o_eoD6sVTdF6f-DdPXQts87x-m0Ug2G5qhLTmB_dM2QQV1gjmO3FPuGR65z81-ev_FnPrPHatYlBBapIb2SXd1L30_WDTCBrAobWRF-UcbN8jVWykllZOUUZZ8GzjYuspV9rGKaBNHhboqBM0QDv0dFAuC_CEYFehSLAbLNVtSzJ88"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-brutal flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-5xl">visibility</span>
+</div>
+</div>
+<div class="relative overflow-hidden group aspect-[3/4]">
+<img class="w-full h-full object-cover transition-brutal group-hover:scale-105" data-alt="focused athlete performing a barbell lift under dramatic gold neon lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6RBl-7plMkjdO5knJaIqUrwZPAlt_f4aSb2UwrbOnY8cUd0ECvXsSeQ-v93AgzZX1kRBb_qwVce9bIWylWJ9FqkdzbAva8Kt6_hsPxMQZZHrUura9d5AESoeimY1kOXOr30H5rNpBNBnfgsuaD9tC9qOo0OqHxI9yuCF5KaKOX1Vb7EwQyrC9b4TuHwkmXKDWf2EIT3tYsPaAKOD8OtL3wZjJoGzFSL7awDe4Qu4rEaCk17yT8cW2bucsZyokTe0DRuNDuBmQQNw"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-brutal flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-5xl">visibility</span>
+</div>
+</div>
+<div class="relative overflow-hidden group aspect-video">
+<img class="w-full h-full object-cover transition-brutal group-hover:scale-105" data-alt="ultra-luxury gym lounge area with dark charcoal furniture and minimalist gold accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkAExcFSatBo0hCrZwWbFYc9qrbglUQHqua8ZWUR8tHnc6vXKPh16mEWYH4-xtEd0pnp7X0xw5A5WA5l6cKVQQVV1P9JZ1zzhKPln0h9ADUE-b5BMRwtdpY6Cvnn8uBrrD_obpSURUufZqVeSpGPdKcs0tvcvpcL_fk3Yk8ljupACudzBsYBXZqNXcPm-wvN7wfO9RNLMBbHHxqgTLww7punCZoWAQA_kC2SCd_zYaT2Zrn-BLjUSPi1eDlYyEOYsBmxjRo5PvnL4"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-brutal flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-5xl">visibility</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Feedback Section -->
+<section class="py-32 px-10 bg-surface-container">
+<div class="max-w-2xl mx-auto text-center">
+<h2 class="font-headline text-4xl uppercase mb-12 tracking-tighter">SHARE YOUR INTENT</h2>
+<form class="space-y-8">
+<div class="grid grid-cols-2 gap-8">
+<input class="bg-transparent border-b-2 border-outline-variant/30 focus:border-primary focus:ring-0 placeholder:text-neutral-600 font-headline tracking-widest text-sm py-4 sharp-edge" placeholder="FULL NAME" type="text"/>
+<input class="bg-transparent border-b-2 border-outline-variant/30 focus:border-primary focus:ring-0 placeholder:text-neutral-600 font-headline tracking-widest text-sm py-4 sharp-edge" placeholder="EMAIL ADDRESS" type="email"/>
+</div>
+<textarea class="w-full bg-transparent border-b-2 border-outline-variant/30 focus:border-primary focus:ring-0 placeholder:text-neutral-600 font-headline tracking-widest text-sm py-4 sharp-edge" placeholder="MESSAGE" rows="4"></textarea>
+<button class="w-full bg-primary-container text-on-primary py-6 font-headline tracking-[0.4em] uppercase font-bold text-lg hover:brightness-110 transition-brutal">SUBMIT TRANSMISSION</button>
+</form>
+</div>
+</section>
+<!-- Contact & Map Section -->
+<section class="grid lg:grid-cols-2 h-[600px] bg-surface-container-lowest">
+<div class="relative bg-neutral-900 overflow-hidden">
+<div class="absolute inset-0 filter grayscale invert opacity-30 contrast-125" data-location="VIGOR HQ" style="">
+<!-- Map Placeholder Representation -->
+<div class="w-full h-full bg-neutral-800 flex items-center justify-center">
+<span class="font-display text-4xl text-white/10 uppercase tracking-[2em] -rotate-45">LOCATION TRACKER</span>
+</div>
+</div>
+<div class="absolute inset-0 p-20 flex flex-col justify-end bg-gradient-to-t from-black via-black/40 to-transparent">
+<h3 class="font-headline text-4xl mb-4">VIGOR HQ</h3>
+<p class="font-body text-on-surface-variant max-w-xs mb-8">IRON DISTRICT, SECTOR 08<br/>THE METROPOLIS, 110001</p>
+<div class="grid grid-cols-2 gap-4">
+<button class="bg-white/5 border border-white/10 py-3 text-[10px] font-headline tracking-widest uppercase hover:bg-white hover:text-black transition-brutal">CALL</button>
+<button class="bg-white/5 border border-white/10 py-3 text-[10px] font-headline tracking-widest uppercase hover:bg-white hover:text-black transition-brutal">WHATSAPP</button>
+<button class="bg-white/5 border border-white/10 py-3 text-[10px] font-headline tracking-widest uppercase hover:bg-white hover:text-black transition-brutal">INSTAGRAM</button>
+<button class="bg-white/5 border border-white/10 py-3 text-[10px] font-headline tracking-widest uppercase hover:bg-white hover:text-black transition-brutal">DIRECTIONS</button>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-center p-20 border-l border-white/5 bg-neutral-950">
+<div class="text-center">
+<img alt="VIGOR" class="w-32 h-32 mx-auto mb-8 grayscale brightness-200" data-alt="large minimalist gold geometric logo emblem on a dark ground" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNRID4MAkAnC7QUwz8LxqKyoWe_b7gfmtFJ0YQGzH379qPsccoUPpSq_-oNQoGXXoD904EvWvx5I-tzb0Yibw6jtUI52QTNBJVYOF3h06yaekubPJY-MJHlVVN_sA1ZUFmon-l_lr_eQWBhWacwvIcftDXPvJN66hHTOeNUDj3F85g12w_GaVgtMUW7qyhA-WtKNqSPvyp5kcBIKoGxz4D-qAkdVwtJJTx0fejSQ3soLY_aj9RGTzIj7docsPqEUKM52gLcI3YLbU"/>
+<h2 class="font-display text-7xl text-primary mb-2">VIGOR</h2>
+<p class="font-headline text-sm tracking-[0.5em] text-on-surface-variant italic opacity-50 uppercase">THE ULTIMATE HUMAN UPGRADE</p>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-neutral-950 py-16 px-10 border-t border-white/5">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
+<div class="flex gap-4">
+<a class="w-10 h-10 bg-white/5 flex items-center justify-center hover:bg-primary transition-brutal group" href="#">
+<span class="material-symbols-outlined text-sm group-hover:text-black">share</span>
+</a>
+<a class="w-10 h-10 bg-white/5 flex items-center justify-center hover:bg-primary transition-brutal group" href="#">
+<span class="material-symbols-outlined text-sm group-hover:text-black">link</span>
+</a>
+<a class="w-10 h-10 bg-white/5 flex items-center justify-center hover:bg-primary transition-brutal group" href="#">
+<span class="material-symbols-outlined text-sm group-hover:text-black">public</span>
+</a>
+</div>
+<p class="font-headline text-[10px] tracking-[0.4em] opacity-30 text-center uppercase">© 2024 VIGOR FITNESS CLUB. ALL RIGHTS RESERVED. FORGED IN PRECISION.</p>
+<div class="flex gap-8 font-headline text-[10px] tracking-widest text-on-surface-variant opacity-50 uppercase">
+<a class="hover:text-primary transition-colors" href="#">PRIVACY</a>
+<a class="hover:text-primary transition-colors" href="#">TERMS</a>
+<a class="hover:text-primary transition-colors" href="#">SUPPORT</a>
+</div>
+</div>
+</footer>
+<!-- FAB Stack -->
+<div class="fixed right-8 bottom-32 flex flex-col gap-4 z-40">
+<div class="group relative">
+<button class="w-14 h-14 bg-primary-container text-on-primary rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-brutal">
+<span class="material-symbols-outlined">call</span>
+</button>
+<span class="absolute right-full mr-4 top-1/2 -translate-y-1/2 bg-neutral-900 px-4 py-2 text-[10px] font-headline tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-brutal whitespace-nowrap">CONTACT CLUB</span>
+</div>
+<div class="group relative">
+<button class="w-14 h-14 bg-neutral-900 text-white rounded-full flex items-center justify-center border border-white/10 hover:border-primary transition-brutal">
+<span class="material-symbols-outlined">chat</span>
+</button>
+<span class="absolute right-full mr-4 top-1/2 -translate-y-1/2 bg-neutral-900 px-4 py-2 text-[10px] font-headline tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-brutal whitespace-nowrap">WHATSAPP</span>
+</div>
+<div class="group relative">
+<button class="w-14 h-14 bg-neutral-900 text-white rounded-full flex items-center justify-center border border-white/10 hover:border-primary transition-brutal">
+<span class="material-symbols-outlined">camera</span>
+</button>
+<span class="absolute right-full mr-4 top-1/2 -translate-y-1/2 bg-neutral-900 px-4 py-2 text-[10px] font-headline tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-brutal whitespace-nowrap">INSTAGRAM</span>
+</div>
+</div>
+</body></html>

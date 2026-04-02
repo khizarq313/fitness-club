@@ -1,0 +1,186 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* ─── CSS Custom Properties ─── */
+:root {
+  --gold-glow: 0 0 24px rgba(245, 166, 35, 0.25);
+  --gold-glow-lg: 0 0 48px rgba(245, 166, 35, 0.3);
+  --vault-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --surface-glass: rgba(255, 255, 255, 0.03);
+  --border-glass: rgba(255, 255, 255, 0.05);
+}
+
+/* ─── Base Resets ─── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100svh;
+  overflow-x: hidden;
+  background-color: #0A0A0A;
+  color: #FFFFFF;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: rgba(245, 166, 35, 0.3);
+  color: #FFFFFF;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0A0A0A;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2A2A2A;
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #F5A623;
+}
+
+/* ─── Glass Card ─── */
+@layer components {
+  .glass-card {
+    background: var(--surface-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border-glass);
+    transition: all 0.4s var(--vault-ease);
+  }
+
+  .glass-card:hover {
+    border-color: rgba(245, 166, 35, 0.2);
+    box-shadow: var(--gold-glow);
+  }
+
+  /* ─── Gold Gradient Button ─── */
+  .btn-gold {
+    background: linear-gradient(135deg, #F5A623 0%, #C47D0E 100%);
+    color: #000000;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 14px 32px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.4s var(--vault-ease);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-gold::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.4s var(--vault-ease);
+  }
+
+  .btn-gold:hover {
+    box-shadow: var(--gold-glow-lg);
+    transform: translateY(-1px);
+  }
+
+  .btn-gold:hover::before {
+    opacity: 1;
+  }
+
+  .btn-gold:active {
+    transform: translateY(0);
+  }
+
+  /* ─── Ghost Button ─── */
+  .btn-ghost {
+    background: transparent;
+    color: #FFFFFF;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 14px 32px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    cursor: pointer;
+    transition: all 0.4s var(--vault-ease);
+  }
+
+  .btn-ghost:hover {
+    border-color: #F5A623;
+    color: #F5A623;
+    box-shadow: var(--gold-glow);
+  }
+
+  /* ─── Section container ─── */
+  .section-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  @media (min-width: 768px) {
+    .section-container {
+      padding: 0 48px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .section-container {
+      padding: 0 64px;
+    }
+  }
+}
+
+/* ─── Grain Overlay ─── */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* ─── Watermark Text ─── */
+.watermark-text {
+  -webkit-text-stroke: 1px rgba(245, 166, 35, 0.6);
+  -webkit-text-fill-color: transparent;
+  opacity: 0.05;
+  user-select: none;
+  pointer-events: none;
+}

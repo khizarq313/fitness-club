@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VIGOR | Forge Your Strength</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas_Neue&amp;family=Oswald:wght@300;500;700&amp;family=Inter:wght@300;400;600;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "background": "#131313",
+                "tertiary-fixed-dim": "#e9c400",
+                "secondary-fixed-dim": "#c8c6c5",
+                "on-tertiary-fixed": "#221b00",
+                "primary-container": "#f5a623",
+                "on-secondary-container": "#b7b5b4",
+                "on-secondary": "#303030",
+                "on-tertiary-fixed-variant": "#544600",
+                "on-secondary-fixed-variant": "#474746",
+                "surface-container-high": "#2a2a2a",
+                "tertiary-fixed": "#ffe16d",
+                "tertiary-container": "#d6b400",
+                "surface": "#131313",
+                "surface-dim": "#131313",
+                "primary": "#ffc880",
+                "on-primary-container": "#644000",
+                "surface-container-highest": "#353534",
+                "secondary-fixed": "#e5e2e1",
+                "surface-container": "#201f1f",
+                "primary-fixed": "#ffddb4",
+                "secondary-container": "#474746",
+                "on-tertiary-container": "#554600",
+                "on-tertiary": "#3a3000",
+                "secondary": "#c8c6c5",
+                "surface-bright": "#3a3939",
+                "on-error": "#690005",
+                "surface-container-lowest": "#0e0e0e",
+                "inverse-on-surface": "#313030",
+                "error": "#ffb4ab",
+                "on-primary-fixed-variant": "#633f00",
+                "on-surface": "#e5e2e1",
+                "surface-tint": "#ffb955",
+                "on-primary-fixed": "#291800",
+                "on-error-container": "#ffdad6",
+                "inverse-primary": "#835500",
+                "outline-variant": "#524534",
+                "tertiary": "#f6cf00",
+                "primary-fixed-dim": "#ffb955",
+                "surface-container-low": "#1c1b1b",
+                "inverse-surface": "#e5e2e1",
+                "outline": "#9f8e7a",
+                "on-primary": "#452b00",
+                "surface-variant": "#353534",
+                "on-surface-variant": "#d7c3ae",
+                "error-container": "#93000a",
+                "on-background": "#e5e2e1",
+                "on-secondary-fixed": "#1b1c1c"
+              },
+              fontFamily: {
+                "headline": ["Oswald", "sans-serif"],
+                "body": ["Inter", "sans-serif"],
+                "label": ["Inter", "sans-serif"],
+                "display": ["Bebas Neue", "cursive"]
+              },
+              borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .grain-overlay {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+        }
+        .vigor-text-overlay {
+            font-family: 'Bebas Neue', cursive;
+            -webkit-text-stroke: 1px rgba(255, 200, 128, 0.05);
+            color: transparent;
+            font-size: 15rem;
+            line-height: 1;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .kinetic-gradient {
+            background: linear-gradient(135deg, #ffc880 0%, #f5a623 100%);
+        }
+        .flip-card-inner {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            backface-visibility: hidden;
+        }
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary selection:text-on-primary">
+<div class="fixed inset-0 grain-overlay pointer-events-none z-[9999]"></div>
+<!-- 1. Sticky Nav -->
+<nav class="fixed top-0 w-full z-50 bg-transparent dark:bg-black/90 backdrop-blur-md flex justify-between items-center px-8 py-6 max-w-full">
+<div class="text-2xl font-black text-amber-500 tracking-widest font-['Bebas_Neue'] uppercase">VIGOR</div>
+<div class="hidden md:flex items-center space-y-0 space-x-12">
+<a class="font-['Bebas_Neue'] tracking-[0.05em] uppercase text-amber-400 border-b-2 border-amber-500 pb-1 hover:scale-105 duration-300 transition-all" href="#">PROGRAMS</a>
+<a class="font-['Bebas_Neue'] tracking-[0.05em] uppercase text-zinc-400 hover:text-white transition-colors hover:scale-105 duration-300" href="#">COACHES</a>
+<a class="font-['Bebas_Neue'] tracking-[0.05em] uppercase text-zinc-400 hover:text-white transition-colors hover:scale-105 duration-300" href="#">MEMBERSHIP</a>
+<a class="font-['Bebas_Neue'] tracking-[0.05em] uppercase text-zinc-400 hover:text-white transition-colors hover:scale-105 duration-300" href="#">FACILITIES</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-on-surface-variant text-sm font-medium hover:text-primary transition-colors">Client Login</button>
+<button class="kinetic-gradient text-on-primary px-6 py-2 font-headline font-bold uppercase tracking-wider rounded-lg shadow-[0_0_20px_rgba(245,166,35,0.2)] hover:scale-105 transition-transform">Enquire Now</button>
+</div>
+</nav>
+<!-- 2. Hero Section -->
+<section class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-40" data-alt="high-contrast wide shot of a luxury dark industrial gym with golden morning light hitting iron weights and squat racks" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkyujVtDxaf9iUU60Uxda6j-GCYWiPEftTtCN_4VJiHbM_J_4ZY1Hd7d-IDDIdtrv_xFXgD9Sq2OdVD_OWf2cmFVkqtEOleLcmYsn7T94Jpl4u3YhRqvRDeAIwI4MjVxSt6MOF1BmvE-kIv_9jAjVVlY9clwu9pSEpH0Q5ZJ_1jMu1HqFQ5kg_poFlzkCmPdOvKIRAvoYqYn7J60yvDrTfw9ItrdAWFb_b4wHJqCiEMkr0FU1tmpicX9ccgI2JCFqY_cy6uk8U4zg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+</div>
+<div class="absolute top-1/4 -right-20 vigor-text-overlay select-none pointer-events-none hidden lg:block">
+            VIGOR
+        </div>
+<div class="container mx-auto px-8 relative z-10">
+<div class="max-w-4xl">
+<h1 class="font-display text-[12vw] leading-[0.9] text-on-surface tracking-tighter uppercase mb-8">
+                    FORGE YOUR<br/>
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-tertiary">STRENGTH</span>
+</h1>
+<p class="font-headline text-2xl text-on-surface-variant max-w-xl mb-12 uppercase tracking-widest leading-relaxed">
+                    The elite performance sanctuary for those who demand precision and power.
+                </p>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8 border-l border-outline-variant/30 pl-8">
+<div>
+<div class="text-primary font-display text-4xl">24/7</div>
+<div class="text-on-surface-variant font-label text-xs uppercase tracking-tighter">Elite Access</div>
+</div>
+<div>
+<div class="text-primary font-display text-4xl">50+</div>
+<div class="text-on-surface-variant font-label text-xs uppercase tracking-tighter">Custom Programs</div>
+</div>
+<div>
+<div class="text-primary font-display text-4xl">12k</div>
+<div class="text-on-surface-variant font-label text-xs uppercase tracking-tighter">Sq Ft Vault</div>
+</div>
+<div>
+<div class="text-primary font-display text-4xl">15</div>
+<div class="text-on-surface-variant font-label text-xs uppercase tracking-tighter">Master Coaches</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. Quick Access Grid (Bento Style) -->
+<section class="py-24 px-8 container mx-auto">
+<h2 class="font-headline text-4xl uppercase tracking-widest mb-16 border-l-4 border-primary pl-6">Mission Control</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+<!-- Enquiry -->
+<div class="col-span-2 row-span-1 bg-surface-container-high/50 backdrop-blur-xl border border-outline-variant/20 p-6 rounded-xl group hover:bg-primary/10 transition-all">
+<span class="material-symbols-outlined text-primary text-4xl mb-4" data-icon="contact_support">contact_support</span>
+<h3 class="font-headline text-xl uppercase">Fast Enquiry</h3>
+<p class="text-sm text-on-surface-variant">Speak to a performance consultant.</p>
+</div>
+<!-- Login -->
+<div class="bg-surface-container-high/50 backdrop-blur-xl border border-outline-variant/20 p-6 rounded-xl flex flex-col justify-center items-center text-center group hover:border-primary/50 transition-all">
+<span class="material-symbols-outlined text-primary mb-2" data-icon="login">login</span>
+<div class="font-label text-xs font-bold uppercase">Vault Login</div>
+</div>
+<!-- Booking -->
+<div class="bg-surface-container-high/50 backdrop-blur-xl border border-outline-variant/20 p-6 rounded-xl flex flex-col justify-center items-center text-center group hover:border-primary/50 transition-all">
+<span class="material-symbols-outlined text-primary mb-2" data-icon="calendar_today">calendar_today</span>
+<div class="font-label text-xs font-bold uppercase">Book Session</div>
+</div>
+<!-- Packages -->
+<div class="col-span-2 bg-surface-container-high/50 backdrop-blur-xl border border-outline-variant/20 p-6 rounded-xl flex items-center gap-6 group hover:bg-surface-container-highest transition-all">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="inventory_2">inventory_2</span>
+<div>
+<h3 class="font-headline text-lg uppercase leading-none">View Packages</h3>
+<p class="text-xs text-on-surface-variant">Tiered membership plans.</p>
+</div>
+</div>
+<!-- Offers -->
+<div class="col-span-2 md:col-span-1 bg-tertiary-container/20 border border-tertiary/20 p-6 rounded-xl group hover:bg-tertiary-container/30 transition-all">
+<span class="material-symbols-outlined text-tertiary mb-2" data-icon="local_fire_department" data-weight="fill">local_fire_department</span>
+<div class="font-label text-xs font-bold uppercase">Live Offers</div>
+</div>
+<!-- Repeat icons for the 13 cards requested -->
+<div class="bg-surface-container-high/50 backdrop-blur-xl border border-outline-variant/20 p-6 rounded-xl flex flex-col items-center justify-center group hover:border-primary transition-all">
+<span class="material-symbols-outlined text-primary mb-2" data-icon="fitness_center">fitness_center</span>
+<div class="font-label text-xs uppercase">Equipment</div>
+</div>
+<div class="bg-surface-container-high/50 backdrop-blur-xl border border-outline-variant/20 p-6 rounded-xl flex flex-col items-center justify-center group hover:border-primary transition-all">
+<span class="material-symbols-outlined text-primary mb-2" data-icon="nutrition">nutrition</span>
+<div class="font-label text-xs uppercase">Nutrition</div>
+</div>
+<div class="bg-surface-container-high/50 backdrop-blur-xl border border-outline-variant/20 p-6 rounded-xl flex flex-col items-center justify-center group hover:border-primary transition-all">
+<span class="material-symbols-outlined text-primary mb-2" data-icon="store">store</span>
+<div class="font-label text-xs uppercase">Store</div>
+</div>
+<div class="bg-surface-container-high/50 backdrop-blur-xl border border-outline-variant/20 p-6 rounded-xl flex flex-col items-center justify-center group hover:border-primary transition-all">
+<span class="material-symbols-outlined text-primary mb-2" data-icon="groups">groups</span>
+<div class="font-label text-xs uppercase">Community</div>
+</div>
+<div class="bg-surface-container-high/50 backdrop-blur-xl border border-outline-variant/20 p-6 rounded-xl flex flex-col items-center justify-center group hover:border-primary transition-all">
+<span class="material-symbols-outlined text-primary mb-2" data-icon="workspace_premium">workspace_premium</span>
+<div class="font-label text-xs uppercase">Rewards</div>
+</div>
+<div class="bg-surface-container-high/50 backdrop-blur-xl border border-outline-variant/20 p-6 rounded-xl flex flex-col items-center justify-center group hover:border-primary transition-all">
+<span class="material-symbols-outlined text-primary mb-2" data-icon="map">map</span>
+<div class="font-label text-xs uppercase">Locations</div>
+</div>
+</div>
+</section>
+<!-- 4. Packages Section -->
+<section class="py-24 bg-surface-container-lowest relative overflow-hidden">
+<div class="container mx-auto px-8 relative z-10">
+<h2 class="font-headline text-5xl uppercase tracking-[0.2em] text-center mb-20">Select Your <span class="text-primary">Tier</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Tier 1 -->
+<div class="bg-surface-container p-10 rounded-xl border border-outline-variant/10 flex flex-col h-full hover:translate-y-[-10px] transition-transform">
+<div class="font-headline text-2xl uppercase mb-2">Base Camp</div>
+<div class="text-4xl font-display text-primary mb-6">$99<span class="text-sm text-on-surface-variant font-body">/mo</span></div>
+<ul class="space-y-4 mb-10 flex-grow">
+<li class="flex items-center gap-3 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle">check_circle</span> 24/7 Floor Access</li>
+<li class="flex items-center gap-3 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle">check_circle</span> Locker Room Access</li>
+<li class="flex items-center gap-3 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle">check_circle</span> Standard App Features</li>
+</ul>
+<button class="w-full py-3 border border-outline text-on-surface font-headline uppercase tracking-widest hover:bg-on-surface hover:text-surface transition-colors">Join Base</button>
+</div>
+<!-- Tier 2 Popular -->
+<div class="bg-surface-container-highest p-10 rounded-xl border-2 border-primary relative flex flex-col h-full scale-105 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+<div class="absolute -top-4 left-1/2 -translate-x-1/2 kinetic-gradient px-4 py-1 text-[10px] font-bold uppercase tracking-widest text-on-primary">Most Selected</div>
+<div class="font-headline text-3xl uppercase mb-2">Peak Performance</div>
+<div class="text-5xl font-display text-primary mb-6">$189<span class="text-sm text-on-surface-variant font-body">/mo</span></div>
+<ul class="space-y-4 mb-10 flex-grow">
+<li class="flex items-center gap-3 text-on-surface"><span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span> Everything in Base</li>
+<li class="flex items-center gap-3 text-on-surface"><span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span> 4 Personal Coaching Credits</li>
+<li class="flex items-center gap-3 text-on-surface"><span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span> Recovery Suite Access</li>
+<li class="flex items-center gap-3 text-on-surface"><span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span> Guest Passes (2/mo)</li>
+</ul>
+<button class="w-full py-4 kinetic-gradient text-on-primary font-headline font-bold uppercase tracking-widest hover:brightness-110">Get Peak Access</button>
+</div>
+<!-- Tier 3 -->
+<div class="bg-surface-container p-10 rounded-xl border border-outline-variant/10 flex flex-col h-full hover:translate-y-[-10px] transition-transform">
+<div class="font-headline text-2xl uppercase mb-2">The Vault</div>
+<div class="text-4xl font-display text-primary mb-6">$350<span class="text-sm text-on-surface-variant font-body">/mo</span></div>
+<ul class="space-y-4 mb-10 flex-grow">
+<li class="flex items-center gap-3 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle">check_circle</span> Full Kinetic Vault Access</li>
+<li class="flex items-center gap-3 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle">check_circle</span> Private Training Suite</li>
+<li class="flex items-center gap-3 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle">check_circle</span> Biometric Monitoring</li>
+<li class="flex items-center gap-3 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle">check_circle</span> Nutrition Concierge</li>
+</ul>
+<button class="w-full py-3 border border-outline text-on-surface font-headline uppercase tracking-widest hover:bg-on-surface hover:text-surface transition-colors">Apply for Vault</button>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. Trainers Section -->
+<section class="py-24 px-8 container mx-auto">
+<h2 class="font-headline text-4xl uppercase tracking-widest mb-16 text-right border-r-4 border-primary pr-6">Master Coaches</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Trainer Card -->
+<div class="flip-card h-[500px] w-full cursor-pointer perspective-1000">
+<div class="flip-card-inner relative w-full h-full text-center shadow-lg">
+<div class="flip-card-front absolute inset-0 w-full h-full rounded-xl overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" data-alt="portrait of a muscular fitness coach with a serious expression in a dimly lit high-end gym environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBgPvCbYz1G2BJCSOo6T8zS-ueLCjMenHTvsTUdNUoraFV21f27EAb3zKLG-G1bGVucpTeF9w36cv4GHndnTNswTxrd2e_BRmQsXNr4_UQIWm8ocW8TqNJRZOBS6nGn_DlH2JHs2E0SHC-6IQb8sYLjXh3rtiRW-mqdFAqDO9e_FyQKk6oKRs9fsqcgn_tMA_UNIlUV6sVoq-oUTkId3p0yA0kB_HrcYc_pFqvY7qQVA7TnLFIQIj0qLSHszFoJ_wTdiISQ2JWzaA"/>
+<div class="absolute bottom-0 w-full p-6 text-left bg-gradient-to-t from-black to-transparent">
+<h3 class="font-headline text-2xl uppercase">Marcus Vane</h3>
+<p class="text-primary font-label text-xs uppercase font-bold tracking-widest">Strength &amp; Conditioning</p>
+</div>
+</div>
+<div class="flip-card-back absolute inset-0 w-full h-full rounded-xl bg-surface-container-highest p-8 flex flex-col justify-center items-center">
+<h3 class="font-headline text-3xl uppercase mb-4">The Architect</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6">
+                            12 years experience in professional athlete programming. Specialized in biomechanical optimization and peak explosive power.
+                        </p>
+<div class="flex gap-4">
+<button class="w-10 h-10 rounded-full border border-outline flex items-center justify-center hover:bg-primary transition-colors"><span class="material-symbols-outlined text-sm" data-icon="share">share</span></button>
+<button class="kinetic-gradient text-on-primary px-6 py-2 rounded-lg font-headline text-sm uppercase">Profile</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Trainer 2 -->
+<div class="flip-card h-[500px] w-full cursor-pointer">
+<div class="flip-card-inner relative w-full h-full text-center">
+<div class="flip-card-front absolute inset-0 w-full h-full rounded-xl overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" data-alt="athletic female trainer in boxing gear with intense focus, dark moody gym background with soft bokeh" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNy0SDOka2F4shj8J_EgxYo1T890i_Jb97EvLM_iEA_qSjQMBFcylV36K72T5A5BFap2JZr-Vug2YUC-dVze-R9ouQi6IZ5fZTR9Mez0nj-9eWbHWSqa2-1kA81sB76ptwg5Zc6L5PWMcOCHcFEPDmBLHqaS0F_RMk5WE4nNs9JnFJfMwe0VYuGFWNLJiKOkAXShir18btf_vPJ19_qyCC9N9cNrV_0Ccg-JKGgvUnL-9xXzOxuwclGXo7Di-u_GcPaj6O3IXToX4"/>
+<div class="absolute bottom-0 w-full p-6 text-left bg-gradient-to-t from-black to-transparent">
+<h3 class="font-headline text-2xl uppercase">Elena Frost</h3>
+<p class="text-primary font-label text-xs uppercase font-bold tracking-widest">Combat &amp; HIIT</p>
+</div>
+</div>
+<div class="flip-card-back absolute inset-0 w-full h-full rounded-xl bg-surface-container-highest p-8 flex flex-col justify-center items-center">
+<h3 class="font-headline text-3xl uppercase mb-4">Precision Striker</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6">
+                            Former lightweight champion focusing on technical striking and high-intensity metabolic conditioning.
+                        </p>
+<button class="kinetic-gradient text-on-primary px-6 py-2 rounded-lg font-headline text-sm uppercase">Profile</button>
+</div>
+</div>
+</div>
+<!-- More trainers would follow same structure... -->
+<div class="flip-card h-[500px] w-full cursor-pointer lg:block hidden">
+<div class="flip-card-inner relative w-full h-full">
+<div class="flip-card-front absolute inset-0 w-full h-full rounded-xl overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" data-alt="focused male trainer performing a mobility exercise, high-end gym equipment visible in blurred background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1K2TpnX76djERQg98vkZcX58hxwd8FEM_NL-49XkVS2hLDMQDQXcpTq9NWV8c832ILjz7NZR3rdN9kCCocbkxs4GAYQ3ca02F6S5YZY6Vwt_OHwlJ3TDDCjt0oAhFP6r-aSUt2oM3Unf5tPgENXjdP_YWHiRc-ZUjSy95XW1f3BUpfuxLSu7_gtOu3vJnrrp3R4rpyplg6UVtgOCZMHuvyRz9TVu9K8UbDPqTNs0IKOR6RGktNoJktBe9K1GMtNubmPPfBUJx7iA"/>
+<div class="absolute bottom-0 w-full p-6 text-left bg-gradient-to-t from-black to-transparent">
+<h3 class="font-headline text-2xl uppercase">Julian Thorne</h3>
+<p class="text-primary font-label text-xs uppercase font-bold tracking-widest">Mobility &amp; Longevity</p>
+</div>
+</div>
+<div class="flip-card-back absolute inset-0 w-full h-full rounded-xl bg-surface-container-highest p-8 flex flex-col justify-center items-center">
+<h3 class="font-headline text-3xl uppercase mb-4">The Kineticist</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6">Master of movement mechanics and restorative performance training.</p>
+<button class="kinetic-gradient text-on-primary px-6 py-2 rounded-lg font-headline text-sm uppercase">Profile</button>
+</div>
+</div>
+</div>
+<div class="flip-card h-[500px] w-full cursor-pointer lg:block hidden">
+<div class="flip-card-inner relative w-full h-full">
+<div class="flip-card-front absolute inset-0 w-full h-full rounded-xl overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" data-alt="confident female coach with long hair and athletic build, standing in a premium modern gym" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBThN7HNXddRy45_KMxy5ftjkdJfS4uGb3WUse-O-UmxkK6R_Y2xBjPl1iZ9y2UWwofYtN-Yv7SKX_POfxw4fmOVcyrnRlqXeiG0LxA411Q9dMI7eJlM6NcKJyjRAXJdBO8YQsyDRL_V09wAWwiQtBcrWeguheRIheL90HbCr6ODNjipc6BYhDwMK-ovuswtZurON4awvzZPgBbiM5WkFS38_MXnB3AaaQOvyAfKbBoXmyJQ1gvKac2GFJpSnzMm72sSIdpp3j2M4U"/>
+<div class="absolute bottom-0 w-full p-6 text-left bg-gradient-to-t from-black to-transparent">
+<h3 class="font-headline text-2xl uppercase">Sasha Reed</h3>
+<p class="text-primary font-label text-xs uppercase font-bold tracking-widest">Hypertrophy Master</p>
+</div>
+</div>
+<div class="flip-card-back absolute inset-0 w-full h-full rounded-xl bg-surface-container-highest p-8 flex flex-col justify-center items-center">
+<h3 class="font-headline text-3xl uppercase mb-4">Volume Queen</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6">Expert in hypertrophy training and aesthetic physical sculpting for competitive levels.</p>
+<button class="kinetic-gradient text-on-primary px-6 py-2 rounded-lg font-headline text-sm uppercase">Profile</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 6. Reviews (Infinite Scroll Simulation) -->
+<section class="py-24 overflow-hidden bg-surface-container-low">
+<div class="container mx-auto px-8 mb-12">
+<h2 class="font-headline text-4xl uppercase tracking-widest">Client Echoes</h2>
+</div>
+<div class="flex gap-8 px-8 hide-scrollbar overflow-x-auto snap-x snap-mandatory py-4">
+<!-- Review 1 -->
+<div class="flex-shrink-0 w-[400px] bg-surface p-8 rounded-xl border border-outline-variant/10 snap-center">
+<div class="flex text-primary mb-4">
+<span class="material-symbols-outlined" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="text-on-surface-variant italic mb-6">"The atmosphere here is unmatched. It's not just a gym; it's a mental shift. The equipment is the best I've ever used in any elite facility globally."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center text-primary font-bold">JD</div>
+<div>
+<div class="font-headline uppercase text-sm">James Donovan</div>
+<div class="text-[10px] text-on-surface-variant uppercase tracking-widest">Peak Member</div>
+</div>
+</div>
+</div>
+<!-- Review 2 -->
+<div class="flex-shrink-0 w-[400px] bg-surface p-8 rounded-xl border border-outline-variant/10 snap-center">
+<div class="flex text-primary mb-4">
+<span class="material-symbols-outlined" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="text-on-surface-variant italic mb-6">"Biometric tracking in the Vault membership has changed how I train. I finally understand how to push without burning out. Vigor is ahead of the game."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center text-primary font-bold">SC</div>
+<div>
+<div class="font-headline uppercase text-sm">Sarah Chen</div>
+<div class="text-[10px] text-on-surface-variant uppercase tracking-widest">Vault Member</div>
+</div>
+</div>
+</div>
+<!-- Review 3 -->
+<div class="flex-shrink-0 w-[400px] bg-surface p-8 rounded-xl border border-outline-variant/10 snap-center">
+<div class="flex text-primary mb-4">
+<span class="material-symbols-outlined" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="text-on-surface-variant italic mb-6">"Best recovery suite in the city. The cold plunge and infrared sauna integration is vital for my post-fight camps. Incredible facility."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center text-primary font-bold">MK</div>
+<div>
+<div class="font-headline uppercase text-sm">Mike Kovic</div>
+<div class="text-[10px] text-on-surface-variant uppercase tracking-widest">Pro Athlete</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 7. Gallery (Masonry Style) -->
+<section class="py-24 container mx-auto px-8">
+<h2 class="font-headline text-4xl uppercase tracking-widest mb-16 border-l-4 border-primary pl-6">The Sanctuary</h2>
+<div class="columns-1 md:columns-2 lg:columns-3 gap-4 space-y-4">
+<div class="rounded-xl overflow-hidden border border-outline-variant/20 hover:scale-[1.02] transition-transform duration-500">
+<img class="w-full" data-alt="overhead view of a high-end rowing machine area in a dark gym with warm wood accents and atmospheric lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmFNpI0iUCmF4g-wcCUy8yeWqT-NRq26u8g6qxgx4JfyR7D1mPRlnHwVAAGi6Apj3fbcyzDqoxSUuT7oyGq3X98U_lxhXV6WrBLJEy5dG9j1zCQuyekQ1aAbCnq2h0okhUgaw8svAGBjhq0jympGvjUz_lhuSlum92SyaunBCnv31SEKw1UxGibShmGzOjcejduaQ5V_AMiFnYn03Qky4by_hRhMQbAfVFPYmpT7pNZOD9fWESYBhZkKsIBJP8DHy4nCDDFBRbz_Y"/>
+</div>
+<div class="rounded-xl overflow-hidden border border-outline-variant/20 hover:scale-[1.02] transition-transform duration-500">
+<img class="w-full" data-alt="close up of custom black dumbbells on a rack in a premium gym, soft golden lighting highlighting the metal texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCigsp3p8w9rRMVqiND0XbPYJZqAbLuflzhajh5hvBydqDPVEiXKoGmeRbT3SaTWEkbFkVxGNnULOBWMehm_ZrGZcpprRBAYEL6Vq_1fJKsrTwt01BSyXKm0si7tAXbNZ_o9PH8cjAIZaivInwGYvO62_-HKL4bzQpanrn4a83Wi3CaStEhP5RBrvJvorrbIf17_bHKxxjybyTHqJ4Ut1JiUhAx1jur_PzubmsOQYBqqUI8Vp93VBrLtWT6pEweljEPEMf5QAbZ8vc"/>
+</div>
+<div class="rounded-xl overflow-hidden border border-outline-variant/20 hover:scale-[1.02] transition-transform duration-500">
+<img class="w-full" data-alt="luxury yoga and mobility studio with large windows showing a city skyline at dusk, warm interior glow" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTVYmsyJABxKwQ0JKlc0tfFrT90jPUMLxQLBjFKQ-OZmzWtdVWA6lv-zMn5YsYsccfpsDJKExMFDWi8mAWaaHjOUIgvL_uXs1VaE4e4BhsQBujyFhmBirvNMwCnZ99jswyqdsxbpU3QpulNCIFcf4VR5n2DzYFx-9RaM-m-hOKw6SJgbeBgCwrbr1-c6R6t2xbtaQX5Wl1uVjveq0P6Nw6YNZBB2jengcl-8Gfd6uI63kyK7MUqiM3S8oMZdWfM281J-ubeYsVVaQ"/>
+</div>
+<div class="rounded-xl overflow-hidden border border-outline-variant/20 hover:scale-[1.02] transition-transform duration-500">
+<img class="w-full" data-alt="high-tech stationary bike zone with individual performance screens, neon amber lighting accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbQGRbcrPmO4vCDDNZA9Lf_Jta7E6XNaDZYC9xmodeRsCUE1kxmbMw_WoDq2P8niyDoGc7sbFGTC41ZB8iqOnZXKW4aQf9SYT7Lc1iBHOy3CWHE7vc5FRahfcA8Sb1ELsWXDCP4PCndVO_LMUPPwp7y-ha4Ux8qEBhEeYO3s7yl9G5RqqfshNsijCuXM1PnxOUl-klPfasmz0u5UzRhnwmMZXdgi6PY3ZTP9gEXO3anvUl9Hv0qJNn_1NtFjKX3ibdZEpDdnHzaT8"/>
+</div>
+<div class="rounded-xl overflow-hidden border border-outline-variant/20 hover:scale-[1.02] transition-transform duration-500">
+<img class="w-full" data-alt="indoor lap pool with dark tiling and underwater lighting, creating a luxury sanctuary vibe" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJvfMi7aAhQLXP5kYdCqjl2wtmDDhZwLU3nFa9QHnz3OIBPEHIpaZMWJ5IATos3LdQXpDbvoVDqYU_7HT2BJyTz6YkFTh6rxq7S8U7WySrORqtMf8y0O6uspr5jHOuLRrHz6nuuxqWWRvY3Xi5fK6f8TQm84e5LRvTGoqiOmgESmPfxoMAvjXp7CKxbKwCyMSJ-R6BzU6N4liTmuWicbDQfJwvsNoG2Bstw558Hv-j01ZaxEZtj2ZU991QU0eqEUQVxHtX1hggj3M"/>
+</div>
+</div>
+</section>
+<!-- 8. Feedback Form -->
+<section class="py-24 bg-surface-container-lowest">
+<div class="container mx-auto px-8 max-w-2xl">
+<div class="bg-surface-container p-12 rounded-2xl border border-outline-variant/10">
+<h2 class="font-headline text-3xl uppercase mb-8 text-center">Share Your <span class="text-primary">Impact</span></h2>
+<form class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label class="block text-[10px] uppercase font-bold text-on-surface-variant mb-2">Member Name</label>
+<input class="w-full bg-surface-container-lowest border-none focus:ring-1 focus:ring-primary text-on-surface px-4 py-3 rounded-md placeholder:text-zinc-700" placeholder="Your Name" type="text"/>
+</div>
+<div>
+<label class="block text-[10px] uppercase font-bold text-on-surface-variant mb-2">Vault ID (Optional)</label>
+<input class="w-full bg-surface-container-lowest border-none focus:ring-1 focus:ring-primary text-on-surface px-4 py-3 rounded-md placeholder:text-zinc-700" placeholder="VG-0000" type="text"/>
+</div>
+</div>
+<div>
+<label class="block text-[10px] uppercase font-bold text-on-surface-variant mb-2">Experience Rating</label>
+<div class="flex gap-2 text-primary">
+<span class="material-symbols-outlined cursor-pointer" data-icon="star">star</span>
+<span class="material-symbols-outlined cursor-pointer" data-icon="star">star</span>
+<span class="material-symbols-outlined cursor-pointer" data-icon="star">star</span>
+<span class="material-symbols-outlined cursor-pointer" data-icon="star">star</span>
+<span class="material-symbols-outlined cursor-pointer text-zinc-700" data-icon="star">star</span>
+</div>
+</div>
+<div>
+<label class="block text-[10px] uppercase font-bold text-on-surface-variant mb-2">Your Feedback</label>
+<textarea class="w-full bg-surface-container-lowest border-none focus:ring-1 focus:ring-primary text-on-surface px-4 py-3 rounded-md placeholder:text-zinc-700" placeholder="How can we improve your sanctuary?" rows="4"></textarea>
+</div>
+<button class="w-full kinetic-gradient text-on-primary py-4 font-headline uppercase font-bold tracking-[0.2em] hover:shadow-[0_0_30px_rgba(245,166,35,0.3)] transition-all" type="submit">Submit Feedback</button>
+</form>
+</div>
+</div>
+</section>
+<!-- 9. Contact Section -->
+<section class="py-24 container mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-12">
+<div class="rounded-xl overflow-hidden min-h-[400px] border border-outline-variant/20 relative group">
+<div class="absolute inset-0 bg-black/40 z-10 pointer-events-none group-hover:bg-black/10 transition-all"></div>
+<img class="w-full h-full object-cover grayscale" data-alt="abstract stylized map of a metropolitan city with gold accent lines indicating luxury gym location" data-location="Los Angeles" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9XemrNYr9Rhu2wTTBIW_OvlirxHs-Y4ZG19HtysEkogOV7luIZxV5F_cifFPW8aSKLP54ZDBdvxkR0g1p3lwBOd2j0T2UNgrtorsaELNa9NFw_h7owxk_IyqEc91rwQnxTmP7jqr1V4tIyp-Phi8Uh1saWeJkeFCb7j3IKIdDeMRSMLx2ySp-ewna6CBgV_zUsDN4E7wz-RxUwq_FbtFqwNSt3VcFCZYBsLPgQIHbJjRMAASQrG57Q4u2-xdaYmQFFHpKshPaJGE"/>
+<div class="absolute bottom-6 left-6 z-20">
+<div class="bg-surface-container-highest p-4 rounded-xl shadow-2xl border border-primary/20">
+<p class="font-headline uppercase text-xs text-primary mb-1">Global HQ</p>
+<p class="text-on-surface text-sm">888 Kinetic Blvd, Elite District<br/>West Hollywood, CA 90069</p>
+</div>
+</div>
+</div>
+<div class="flex flex-col justify-center">
+<h2 class="font-headline text-4xl uppercase tracking-widest mb-4">Command Center</h2>
+<p class="text-on-surface-variant mb-12">Reach out to our elite operations team via the direct channels below.</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<button class="flex items-center gap-4 bg-surface-container p-6 rounded-xl border border-outline-variant/10 hover:border-primary transition-all group">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="phone_in_talk">phone_in_talk</span>
+<div class="text-left">
+<div class="font-label text-[10px] font-bold uppercase text-on-surface-variant">Call Directly</div>
+<div class="font-headline uppercase">+1 (555) VIGOR-01</div>
+</div>
+</button>
+<button class="flex items-center gap-4 bg-surface-container p-6 rounded-xl border border-outline-variant/10 hover:border-primary transition-all group">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="mail">mail</span>
+<div class="text-left">
+<div class="font-label text-[10px] font-bold uppercase text-on-surface-variant">Secure Email</div>
+<div class="font-headline uppercase">ops@vigor.club</div>
+</div>
+</button>
+<button class="flex items-center gap-4 bg-surface-container p-6 rounded-xl border border-outline-variant/10 hover:border-primary transition-all group">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="calendar_month">calendar_month</span>
+<div class="text-left">
+<div class="font-label text-[10px] font-bold uppercase text-on-surface-variant">Private Tour</div>
+<div class="font-headline uppercase">Schedule Now</div>
+</div>
+</button>
+<button class="flex items-center gap-4 bg-surface-container p-6 rounded-xl border border-outline-variant/10 hover:border-primary transition-all group">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="corporate_fare">corporate_fare</span>
+<div class="text-left">
+<div class="font-label text-[10px] font-bold uppercase text-on-surface-variant">Corporate</div>
+<div class="font-headline uppercase">Elite Partners</div>
+</div>
+</button>
+</div>
+</div>
+</section>
+<!-- 10. Footer -->
+<footer class="bg-zinc-950 w-full py-16 px-8 border-t border-zinc-900">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto">
+<div class="md:col-span-1">
+<div class="text-3xl font-black text-amber-500 tracking-tighter uppercase font-display mb-4">VIGOR</div>
+<p class="font-['Inter'] text-sm tracking-tight text-zinc-500 mb-8 leading-relaxed">
+                    FORGE YOUR STRENGTH. The absolute pinnacle of fitness design, engineering, and programming. Founded on the principle of unrelenting progress.
+                </p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full border border-zinc-800 flex items-center justify-center hover:border-primary hover:text-primary transition-all" href="#"><span class="material-symbols-outlined text-lg" data-icon="photo_camera">photo_camera</span></a>
+<a class="w-10 h-10 rounded-full border border-zinc-800 flex items-center justify-center hover:border-primary hover:text-primary transition-all" href="#"><span class="material-symbols-outlined text-lg" data-icon="public">public</span></a>
+<a class="w-10 h-10 rounded-full border border-zinc-800 flex items-center justify-center hover:border-primary hover:text-primary transition-all" href="#"><span class="material-symbols-outlined text-lg" data-icon="smart_display">smart_display</span></a>
+</div>
+</div>
+<div>
+<h4 class="font-headline text-lg uppercase mb-6 tracking-widest text-on-surface">Vault Sections</h4>
+<ul class="space-y-4">
+<li><a class="text-zinc-500 hover:text-amber-400 transition-colors text-sm font-body" href="#">Training Programs</a></li>
+<li><a class="text-zinc-500 hover:text-amber-400 transition-colors text-sm font-body" href="#">Master Coaches</a></li>
+<li><a class="text-zinc-500 hover:text-amber-400 transition-colors text-sm font-body" href="#">Recovery Suites</a></li>
+<li><a class="text-zinc-500 hover:text-amber-400 transition-colors text-sm font-body" href="#">Member Shop</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline text-lg uppercase mb-6 tracking-widest text-on-surface">Resources</h4>
+<ul class="space-y-4">
+<li><a class="text-zinc-500 hover:text-amber-400 transition-colors text-sm font-body" href="#">Privacy Policy</a></li>
+<li><a class="text-zinc-500 hover:text-amber-400 transition-colors text-sm font-body" href="#">Terms of Service</a></li>
+<li><a class="text-zinc-500 hover:text-amber-400 transition-colors text-sm font-body" href="#">Careers</a></li>
+<li><a class="text-zinc-500 hover:text-amber-400 transition-colors text-sm font-body" href="#">Contact</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline text-lg uppercase mb-6 tracking-widest text-on-surface">The Pulse</h4>
+<p class="text-zinc-500 text-sm mb-4 font-body">Join our dispatch for elite performance insights.</p>
+<div class="flex border-b border-zinc-800 py-2">
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full font-body placeholder:text-zinc-700" placeholder="Email Address" type="email"/>
+<button class="text-primary material-symbols-outlined" data-icon="arrow_forward">arrow_forward</button>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto pt-16 mt-16 border-t border-zinc-900/50 flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="text-zinc-500 font-['Inter'] text-[10px] tracking-widest uppercase">© 2024 VIGOR FITNESS CLUB. FORGE YOUR STRENGTH.</div>
+<div class="flex gap-12">
+<div class="text-[10px] uppercase font-bold text-zinc-800 tracking-[0.4em]">RESILIENCE</div>
+<div class="text-[10px] uppercase font-bold text-zinc-800 tracking-[0.4em]">DISCIPLINE</div>
+<div class="text-[10px] uppercase font-bold text-zinc-800 tracking-[0.4em]">PRECISION</div>
+</div>
+</div>
+</footer>
+<!-- Vertical FAB Stack -->
+<div class="fixed right-6 bottom-6 flex flex-col gap-4 z-50">
+<!-- Directions (Blue) -->
+<button class="w-14 h-14 bg-blue-600 text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform group relative">
+<span class="material-symbols-outlined" data-icon="directions">directions</span>
+<span class="absolute right-full mr-4 bg-zinc-900 text-xs py-1 px-3 rounded uppercase font-bold tracking-widest whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity">Navigate</span>
+</button>
+<!-- Instagram (Gradient) -->
+<button class="w-14 h-14 bg-gradient-to-tr from-purple-600 via-pink-600 to-orange-500 text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform group relative">
+<span class="material-symbols-outlined" data-icon="photo_camera">photo_camera</span>
+<span class="absolute right-full mr-4 bg-zinc-900 text-xs py-1 px-3 rounded uppercase font-bold tracking-widest whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity">Follow</span>
+</button>
+<!-- WhatsApp (Green) -->
+<button class="w-14 h-14 bg-emerald-600 text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform group relative">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+<span class="absolute right-full mr-4 bg-zinc-900 text-xs py-1 px-3 rounded uppercase font-bold tracking-widest whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity">WhatsApp</span>
+</button>
+<!-- Call (Gold) -->
+<button class="w-14 h-14 kinetic-gradient text-on-primary rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(245,166,35,0.4)] hover:scale-110 transition-transform group relative">
+<span class="material-symbols-outlined" data-icon="call" style="font-variation-settings: 'FILL' 1;">call</span>
+<span class="absolute right-full mr-4 bg-zinc-900 text-xs py-1 px-3 rounded uppercase font-bold tracking-widest whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity">Emergency/Call</span>
+</button>
+</div>
+</body></html>
