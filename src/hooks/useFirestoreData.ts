@@ -1,13 +1,11 @@
 import { useState, useEffect, useMemo } from 'react';
 import {
   collection,
+  getDocs,
   query,
   where,
   orderBy,
-  onSnapshot,
   type WhereFilterOp,
-  type Query,
-  type DocumentData,
   type QueryConstraint,
 } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
@@ -19,7 +17,7 @@ interface FirestoreCondition {
 }
 
 /**
- * Real-time Firestore collection listener with optional filtering and ordering.
+ * Firestore collection fetcher with optional filtering and ordering.
  * Serializes conditions/orderField to prevent infinite re-render loops.
  */
 export function useFirestoreData<T extends { id: string }>(
@@ -35,49 +33,56 @@ export function useFirestoreData<T extends { id: string }>(
   const conditionsKey = useMemo(() => JSON.stringify(conditions), [conditions]);
 
   useEffect(() => {
-    setLoading(true);
-    setError(null);
+    let isCancelled = false;
 
-    try {
-      const collRef = collection(db, collectionName);
-      const parsedConditions: FirestoreCondition[] = JSON.parse(conditionsKey);
+    const fetchFirestoreData = async () => {
+      setLoading(true);
+      setError(null);
 
-      const constraints: QueryConstraint[] = parsedConditions.map((c) =>
-        where(c.field, c.operator, c.value),
-      );
+      try {
+        const collRef = collection(db, collectionName);
+        const parsedConditions: FirestoreCondition[] = JSON.parse(conditionsKey);
 
-      if (orderField) {
-        constraints.push(orderBy(orderField, 'asc'));
+        const constraints: QueryConstraint[] = parsedConditions.map((c) =>
+          where(c.field, c.operator, c.value),
+        );
+
+        if (orderField) {
+          constraints.push(orderBy(orderField, 'asc'));
+        }
+
+        const firestoreQuery =
+          constraints.length > 0 ? query(collRef, ...constraints) : collRef;
+
+        const snapshot = await getDocs(firestoreQuery);
+
+        if (isCancelled) return;
+
+        const results = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        })) as T[];
+
+        setData(results);
+      } catch (err) {
+        if (isCancelled) return;
+
+        const message = err instanceof Error ? err.message : 'Unknown error';
+        console.error(`Firestore fetch error on ${collectionName}:`, err);
+        setError(message);
+        setData([]);
+      } finally {
+        if (!isCancelled) {
+          setLoading(false);
+        }
       }
+    };
 
-      const q: Query<DocumentData> = constraints.length > 0
-        ? query(collRef, ...constraints)
-        : collRef;
+    fetchFirestoreData();
 
-      const unsubscribe = onSnapshot(
-        q,
-        (snapshot) => {
-          const results = snapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          })) as T[];
-          setData(results);
-          setLoading(false);
-        },
-        (err) => {
-          console.error(`Firestore error on ${collectionName}:`, err);
-          setError(err.message);
-          setLoading(false);
-        },
-      );
-
-      return () => unsubscribe();
-    } catch (err) {
-      const message = err instanceof Error ? err.message : 'Unknown error';
-      console.error(`Firestore setup error:`, message);
-      setError(message);
-      setLoading(false);
-    }
+    return () => {
+      isCancelled = true;
+    };
   }, [collectionName, conditionsKey, orderField]);
 
   return { data, loading, error };

@@ -21,6 +21,25 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-padding-top: 5rem;
+}
+
+@media (min-width: 768px) {
+  html {
+    scroll-padding-top: 6rem;
+  }
+}
+
+section[id] {
+  scroll-margin-top: 5rem;
+}
+
+@media (min-width: 768px) {
+  section[id] {
+    scroll-margin-top: 6rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -41,6 +60,7 @@ body {
   min-height: 100vh;
   min-height: 100svh;
   overflow-x: hidden;
+  overflow-y: auto;
   background-color: #0A0A0A;
   color: #FFFFFF;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -146,7 +166,7 @@ body {
   /* ─── Section container ─── */
   .section-container {
     width: 100%;
-    max-width: 1400px;
+    max-width: 1440px;
     margin: 0 auto;
     padding: 0 24px;
   }
@@ -159,12 +179,23 @@ body {
 
   @media (min-width: 1280px) {
     .section-container {
-      padding: 0 64px;
+      padding: 0 80px;
     }
   }
 }
 
 /* ─── Grain Overlay ─── */
+@layer utilities {
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 .grain-overlay {
   position: fixed;
   inset: 0;

@@ -1,7 +1,11 @@
-import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
-import { Eye } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { Eye, X } from 'lucide-react';
 import { useFirestoreData } from '@/hooks/useFirestoreData';
+import {
+  CinematicHorizontalSection,
+  CinematicRailCard,
+} from '@/components/ui/CinematicHorizontalSection';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import type { GalleryImage } from '@/types';
 
@@ -11,76 +15,168 @@ export function GallerySection() {
     [],
     'order',
   );
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-60px' });
   const prefersReducedMotion = useReducedMotion();
+  const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
+
+  useEffect(() => {
+    if (!selectedImage) {
+      document.body.style.overflow = '';
+      return;
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setSelectedImage(null);
+      }
+    };
+
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [selectedImage]);
 
   if (loading) return null;
-
-  return (
-    <section id="facilities" className="py-24 md:py-32 bg-background">
-      <div className="section-container">
-        {/* Header */}
-        <div className="text-center mb-16 md:mb-20">
-          <span className="font-headline text-primary tracking-[0.3em] uppercase text-xs mb-4 block">
+  if (images.length === 0) {
+    return (
+      <section id="facilities" className="mt-16 bg-background py-20 md:mt-24 md:py-28 lg:py-32">
+        <div className="section-container">
+          <span className="mb-4 block font-headline text-xs uppercase tracking-[0.3em] text-primary">
             Tour Our World-Class Facilities
           </span>
-          <h2 className="font-display text-5xl md:text-6xl lg:text-7xl tracking-tight uppercase text-on-surface">
+          <h2 className="font-display text-4xl uppercase tracking-tight text-on-surface md:text-5xl lg:text-6xl">
             The Arena
           </h2>
+          <p className="mt-4 max-w-md font-headline text-sm uppercase tracking-widest text-zinc-400">
+            Gallery images coming soon
+          </p>
         </div>
+      </section>
+    );
+  }
 
-        {/* Masonry Grid */}
-        <div
-          ref={ref}
-          className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4"
-        >
-          {images.map((img, index) => (
-            <motion.div
+  return (
+    <>
+      <CinematicHorizontalSection
+        id="facilities"
+        sectionClassName="bg-background"
+        railClassName="items-stretch pb-4 md:pb-6"
+        header={
+          <div className="section-container">
+            <div className="mb-12 md:mb-16 lg:mb-20">
+              <span className="mb-4 block font-headline text-xs uppercase tracking-[0.3em] text-primary">
+                Tour Our World-Class Facilities
+              </span>
+              <h2 className="font-display text-4xl uppercase tracking-tight text-on-surface md:text-5xl lg:text-6xl">
+                The Arena
+              </h2>
+            </div>
+          </div>
+        }
+        renderBackground={() => (
+          <>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="watermark-text font-display text-[24vw] leading-none tracking-tight">
+                ARENA
+              </span>
+            </div>
+            <div className="absolute left-[10%] top-[16%] h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
+          </>
+        )}
+        renderCards={({
+          progress,
+          isPinned,
+          isInView,
+          prefersReducedMotion: reduceMotionForCards,
+        }) =>
+          images.map((img, index) => (
+            <CinematicRailCard
               key={img.id}
-              className="relative overflow-hidden group cursor-pointer break-inside-avoid bg-surface"
-              initial={
-                prefersReducedMotion ? {} : { opacity: 0, scale: 0.96 }
-              }
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{
-                delay: (index % 3) * 0.1,
-                duration: 0.6,
-                ease: [0.16, 1, 0.3, 1],
-              }}
+              progress={progress}
+              index={index}
+              total={images.length}
+              isPinned={isPinned}
+              isInView={isInView}
+              prefersReducedMotion={reduceMotionForCards}
+              outerClassName="flex-none w-[320px] max-w-[85vw] snap-start md:w-[360px] lg:w-[380px]"
+              innerClassName={`group relative overflow-hidden rounded-sm border border-white/10 bg-surface shadow-[0_10px_30px_rgba(0,0,0,0.3)] ${
+                index % 3 === 0
+                  ? 'aspect-[4/5]'
+                  : index % 3 === 1
+                    ? 'aspect-[5/4]'
+                    : 'aspect-[3/4]'
+              }`}
+              hoverScale={1.02}
+              onClick={() => setSelectedImage(img)}
             >
               <img
                 src={img.imageUrl}
                 alt={img.caption ?? 'Vigor Fitness Facility'}
-                className="w-full h-auto object-cover transition-transform duration-700 ease-vault group-hover:scale-105"
+                className="h-full w-full object-cover transition-transform duration-700 ease-vault group-hover:scale-105"
                 loading="lazy"
               />
 
-              {/* Hover Overlay */}
-              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex flex-col items-center justify-center backdrop-blur-sm">
-                <Eye size={28} className="text-primary mb-3" />
-                <span className="font-headline text-primary tracking-widest uppercase text-xs border border-primary/40 px-5 py-2">
+              <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/60 opacity-0 backdrop-blur-sm transition-opacity duration-400 group-hover:opacity-100">
+                <Eye size={28} className="mb-3 text-primary" />
+                <span className="border border-primary/40 px-5 py-2 font-headline text-xs uppercase tracking-widest text-primary">
                   View
                 </span>
                 {img.caption && (
-                  <p className="text-on-surface-variant text-xs mt-3 px-4 text-center">
+                  <p className="mt-3 px-4 text-center text-xs text-on-surface-variant">
                     {img.caption}
                   </p>
                 )}
               </div>
-            </motion.div>
-          ))}
-        </div>
+            </CinematicRailCard>
+          ))
+        }
+      />
 
-        {/* Empty State */}
-        {!loading && images.length === 0 && (
-          <div className="text-center py-20">
-            <p className="text-on-surface-variant font-headline text-sm uppercase tracking-widest">
-              Gallery images coming soon
-            </p>
-          </div>
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            className="fixed inset-0 z-[120] bg-black/90 flex items-center justify-center p-6"
+            initial={prefersReducedMotion ? {} : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedImage(null)}
+          >
+            <motion.button
+              type="button"
+              className="absolute top-5 right-5 text-white/80 hover:text-white transition-colors"
+              onClick={() => setSelectedImage(null)}
+              aria-label="Close gallery preview"
+              initial={prefersReducedMotion ? {} : { opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+            >
+              <X size={28} />
+            </motion.button>
+
+            <motion.div
+              className="max-h-[90vh] max-w-[90vw] flex flex-col items-center gap-4"
+              initial={prefersReducedMotion ? {} : { opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.96 }}
+              onClick={(event) => event.stopPropagation()}
+            >
+              <img
+                src={selectedImage.imageUrl}
+                alt={selectedImage.caption ?? 'Gallery preview'}
+                className="max-h-[90vh] max-w-[90vw] object-contain"
+              />
+              {selectedImage.caption && (
+                <p className="text-sm text-on-surface-variant text-center">
+                  {selectedImage.caption}
+                </p>
+              )}
+            </motion.div>
+          </motion.div>
         )}
-      </div>
-    </section>
+      </AnimatePresence>
+    </>
   );
 }

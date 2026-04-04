@@ -7,6 +7,7 @@ export interface Package {
   price: number;
   durationDays: number;
   isActive: boolean;
+  isPopular?: boolean;
   order: number;
 }
 

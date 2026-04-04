@@ -22,32 +22,49 @@ export function Navbar() {
   const { user, logout } = useAuthStore();
   const navigate = useNavigate();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const isManuallyScrolling = useRef(false);
+  const headerRef = useRef<HTMLElement>(null);
 
   // Always solid, but we can keep scrollY if we want to change shadow or border
   const isScrolled = scrollY > 10;
 
   useEffect(() => {
+    if (!isMobileOpen) {
+      return;
+    }
 
-  }, []);
+    const html = document.documentElement;
+    const previousBodyOverflow = document.body.style.overflow;
+    const previousHtmlOverflow = html.style.overflow;
+
+    document.body.style.overflow = 'hidden';
+    html.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = previousBodyOverflow;
+      html.style.overflow = previousHtmlOverflow;
+    };
+  }, [isMobileOpen]);
 
   const handleNavClick = (href: string) => {
     setIsMobileOpen(false);
-    isManuallyScrolling.current = true;
     const el = document.querySelector(href);
     if (el) {
-      el.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+      const headerHeight = headerRef.current?.getBoundingClientRect().height ?? 0;
+      const targetTop =
+        el.getBoundingClientRect().top + window.scrollY - headerHeight - 12;
+
+      window.scrollTo({
+        top: Math.max(0, targetTop),
+        behavior: prefersReducedMotion ? 'auto' : 'smooth',
+      });
     }
-    // Re-enable observer after animation
-    setTimeout(() => {
-      isManuallyScrolling.current = false;
-    }, 800);
   };
 
   return (
     <>
       {/* Desktop / Main Navbar */}
       <motion.header
+        ref={headerRef}
         className={`fixed top-0 left-0 right-0 z-50 bg-background transition-all duration-500 ease-vault ${
           isScrolled ? 'border-b border-outline/50 shadow-sm' : 'border-b border-transparent'
         }`}
@@ -130,7 +147,7 @@ export function Navbar() {
       <AnimatePresence>
         {isMobileOpen && (
           <motion.div
-            className="fixed inset-0 z-[60] bg-background flex flex-col"
+            className="fixed inset-0 z-[60] flex min-h-[100dvh] flex-col overflow-y-auto overscroll-contain bg-background"
             initial={prefersReducedMotion ? { opacity: 0 } : { x: '100%' }}
             animate={prefersReducedMotion ? { opacity: 1 } : { x: 0 }}
             exit={prefersReducedMotion ? { opacity: 0 } : { x: '100%' }}

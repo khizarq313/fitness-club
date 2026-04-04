@@ -1,7 +1,8 @@
-import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
 import { useFirestoreData } from '@/hooks/useFirestoreData';
-import { useReducedMotion } from '@/hooks/useReducedMotion';
+import {
+  CinematicHorizontalSection,
+  CinematicRailCard,
+} from '@/components/ui/CinematicHorizontalSection';
 import type { Package } from '@/types';
 
 const PACKAGE_CONDITIONS = [
@@ -14,13 +15,15 @@ export function PackagesSection() {
     PACKAGE_CONDITIONS,
     'order',
   );
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-60px' });
-  const prefersReducedMotion = useReducedMotion();
+  const sortedPackages = [...packages].sort(
+    (a, b) =>
+      Number(Boolean(b.isPopular)) - Number(Boolean(a.isPopular)) ||
+      a.order - b.order,
+  );
 
   if (loading) {
     return (
-      <section id="packages" className="py-32 bg-surface">
+      <section id="packages" className="bg-surface py-20 md:py-28 lg:py-32">
         <div className="section-container text-center">
           <div className="w-10 h-10 border-2 border-outline border-t-primary animate-spin mx-auto" />
           <p className="mt-4 font-headline text-sm uppercase tracking-widest text-on-surface-variant">
@@ -32,127 +35,139 @@ export function PackagesSection() {
   }
 
   return (
-    <section id="packages" className="py-24 md:py-32 bg-surface relative overflow-hidden">
-      {/* Watermark */}
-      <div className="absolute top-0 right-0 pointer-events-none select-none -translate-y-1/4">
-        <span className="watermark-text font-display text-[30vw] leading-none">
-          ELITE
-        </span>
-      </div>
-
-      <div className="section-container relative z-10" ref={ref}>
-        {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 md:mb-20 gap-6">
-          <div>
-            <span className="font-headline text-primary tracking-[0.3em] uppercase text-xs mb-4 block">
-              Membership Tiers
-            </span>
-            <h2 className="font-display text-5xl md:text-6xl lg:text-7xl tracking-tight uppercase text-on-surface">
-              Select Your Plan
-            </h2>
+    <CinematicHorizontalSection
+      id="packages"
+      desktopBehavior="carousel"
+      sectionClassName="bg-surface"
+      contentClassName="w-full py-20 md:py-28 lg:py-32"
+      railClassName="pb-6 md:pb-8"
+      header={
+        <div className="section-container relative z-10">
+          <div className="mb-12 flex flex-col items-start justify-between gap-8 md:mb-16 lg:mb-20 md:flex-row md:items-start md:gap-10">
+            <div>
+              <span className="mb-4 block font-headline text-xs uppercase tracking-[0.3em] text-primary">
+                Membership Tiers
+              </span>
+              <h2 className="font-display text-4xl uppercase tracking-tight text-on-surface md:text-5xl lg:text-6xl">
+                Select Your Plan
+              </h2>
+            </div>
+            <p className="mt-4 max-w-md font-body text-sm leading-relaxed text-zinc-400 md:mt-0">
+              Transparent pricing for premium results. Select the tier that
+              matches your ambition.
+            </p>
           </div>
-          <p className="text-on-surface-variant max-w-sm font-body text-sm leading-relaxed">
-            Transparent pricing for premium results. Select the tier that
-            matches your ambition.
-          </p>
         </div>
+      }
+      renderBackground={() => (
+        <>
+          <div className="absolute top-0 right-0 -translate-y-1/4 pointer-events-none select-none">
+            <span className="watermark-text font-display text-[30vw] leading-none">
+              ELITE
+            </span>
+          </div>
+          <div className="absolute left-[12%] top-[18%] h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
+        </>
+      )}
+      renderCards={({
+        progress,
+        isPinned,
+        isInView,
+        prefersReducedMotion,
+      }) =>
+        sortedPackages.map((pkg, index) => {
+          const isFeatured = Boolean(pkg.isPopular) || index === 0;
 
-        {/* Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-          {packages.map((pkg, index) => {
-            const isFeatured = index === 1;
-
-            return (
-              <motion.div
-                key={pkg.id}
-                className={`p-8 md:p-12 relative overflow-hidden group transition-all duration-500 ease-vault ${
-                  isFeatured
-                    ? 'bg-surface-elevated border-t-2 border-primary md:scale-105 z-10 shadow-[0_0_24px_rgba(245,166,35,0.15)]'
-                    : 'bg-surface-high border border-outline hover:border-primary/30'
-                }`}
-                initial={prefersReducedMotion ? {} : { opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{
-                  delay: index * 0.12,
-                  duration: 0.6,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-              >
-                {/* Featured Badge */}
-                {isFeatured && (
-                  <div className="absolute top-0 right-0 bg-primary text-on-primary px-4 py-1.5 text-[10px] font-bold tracking-widest uppercase font-headline">
-                    Most Popular
-                  </div>
-                )}
-
-                {/* Ghost Price Watermark */}
-                <span className="absolute -right-4 -bottom-8 font-display text-[8rem] md:text-9xl text-white/[0.02] select-none pointer-events-none leading-none">
-                  {pkg.price}
-                </span>
-
-                {/* Package Name */}
-                <h3 className="font-headline text-xl md:text-2xl mb-2 text-on-surface uppercase tracking-wider">
-                  {pkg.name}
-                </h3>
-
-                {/* Price */}
-                <div className="mb-8">
-                  <span className="text-primary text-5xl md:text-6xl font-display">
-                    ₹{pkg.price.toLocaleString('en-IN')}
-                  </span>
-                  <span className="text-sm font-body text-on-surface-variant ml-1">
-                    /{pkg.durationDays} Days
-                  </span>
+          return (
+            <CinematicRailCard
+              key={pkg.id}
+              progress={progress}
+              index={index}
+              total={sortedPackages.length}
+              isPinned={isPinned}
+              isInView={isInView}
+              prefersReducedMotion={prefersReducedMotion}
+              outerClassName="w-full flex-shrink-0"
+              innerClassName={`group relative flex h-full flex-col overflow-hidden rounded-sm border p-8 shadow-[0_10px_30px_rgba(0,0,0,0.3)] transition-all duration-500 ease-vault md:p-10 lg:p-12 ${
+                isFeatured
+                  ? 'z-10 border-primary bg-surface-elevated shadow-[0_0_24px_rgba(245,166,35,0.15)]'
+                  : 'border-white/10 bg-surface-high'
+              }`}
+              hoverScale={1.03}
+            >
+              {isFeatured && (
+                <div className="absolute top-0 right-0 bg-primary px-4 py-1.5 font-headline text-[10px] font-bold uppercase tracking-widest text-on-primary">
+                  Most Popular
                 </div>
+              )}
 
-                {/* Features List */}
-                <ul className="space-y-4 mb-10 text-sm text-on-surface-variant border-t border-outline/50 pt-8">
-                  <li className="flex items-center gap-3">
-                    <span className="w-1.5 h-1.5 bg-primary shrink-0" />
-                    Full Gym Access
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <span className="w-1.5 h-1.5 bg-primary shrink-0" />
-                    Premium Equipment
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <span className="w-1.5 h-1.5 bg-primary shrink-0" />
-                    Locker Access
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <span className="w-1.5 h-1.5 bg-primary shrink-0" />
-                    Steam Bath
-                  </li>
-                  {isFeatured && (
-                    <>
-                      <li className="flex items-center gap-3">
-                        <span className="w-1.5 h-1.5 bg-primary shrink-0" />
-                        Priority Class Booking
-                      </li>
-                      <li className="flex items-center gap-3">
-                        <span className="w-1.5 h-1.5 bg-primary shrink-0" />
-                        Recovery Zone Access
-                      </li>
-                    </>
-                  )}
-                </ul>
+              <span className="pointer-events-none absolute -right-4 -bottom-8 select-none font-display text-[8rem] leading-none text-white/[0.02] md:text-9xl">
+                {pkg.price}
+              </span>
 
-                {/* CTA */}
-                <button
-                  onClick={() => window.open(`https://wa.me/9876543210?text=Hi%20Fitness%20Club%2C%20I%20am%20interested%20in%20the%20${encodeURIComponent(pkg.name)}%20package.`, '_blank')}
-                  className={`w-full py-4 text-sm font-headline tracking-widest uppercase transition-all duration-300 ease-vault ${
-                    isFeatured
-                      ? 'btn-gold'
-                      : 'border border-zinc-500 text-white hover:border-primary hover:text-primary'
-                  }`}
-                >
-                  Select Plan
-                </button>
-              </motion.div>
-            );
-          })}
-        </div>
-      </div>
-    </section>
+              <h3 className="mb-2 font-headline text-lg uppercase tracking-wider text-on-surface md:text-xl">
+                {pkg.name}
+              </h3>
+
+              <div className="mb-8">
+                <span className="font-display text-5xl text-primary md:text-6xl">
+                  &#8377;{pkg.price.toLocaleString('en-IN')}
+                </span>
+                <span className="ml-1 font-body text-sm text-zinc-400">
+                  /{pkg.durationDays} Days
+                </span>
+              </div>
+
+              <ul className="mb-10 space-y-4 border-t border-white/10 pt-8 text-sm text-zinc-400">
+                <li className="flex items-center gap-3">
+                  <span className="h-1.5 w-1.5 shrink-0 bg-primary" />
+                  Full Gym Access
+                </li>
+                <li className="flex items-center gap-3">
+                  <span className="h-1.5 w-1.5 shrink-0 bg-primary" />
+                  Premium Equipment
+                </li>
+                <li className="flex items-center gap-3">
+                  <span className="h-1.5 w-1.5 shrink-0 bg-primary" />
+                  Locker Access
+                </li>
+                <li className="flex items-center gap-3">
+                  <span className="h-1.5 w-1.5 shrink-0 bg-primary" />
+                  Steam Bath
+                </li>
+                {isFeatured && (
+                  <>
+                    <li className="flex items-center gap-3">
+                      <span className="h-1.5 w-1.5 shrink-0 bg-primary" />
+                      Priority Class Booking
+                    </li>
+                    <li className="flex items-center gap-3">
+                      <span className="h-1.5 w-1.5 shrink-0 bg-primary" />
+                      Recovery Zone Access
+                    </li>
+                  </>
+                )}
+              </ul>
+
+              <button
+                onClick={() =>
+                  window.open(
+                    `https://wa.me/9876543210?text=Hi%20Fitness%20Club%2C%20I%20am%20interested%20in%20the%20${encodeURIComponent(pkg.name)}%20package.`,
+                    '_blank',
+                  )
+                }
+                className={`mt-auto w-full py-4 font-headline text-sm uppercase tracking-widest transition-all duration-300 ease-vault ${
+                  isFeatured
+                    ? 'btn-gold'
+                    : 'border border-zinc-500 text-white hover:border-primary hover:text-primary'
+                }`}
+              >
+                Select Plan
+              </button>
+            </CinematicRailCard>
+          );
+        })
+      }
+    />
   );
 }
