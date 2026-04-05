@@ -215,6 +215,7 @@ export function CinematicHorizontalSection({
   const [isMobileCarousel, setIsMobileCarousel] = useState(false);
   const [cardsPerView, setCardsPerView] = useState(3);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [mobileScrollIndex, setMobileScrollIndex] = useState(0);
   const isInView = useInView(sectionRef, { once: true, margin: '-15%' });
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -321,6 +322,24 @@ export function CinematicHorizontalSection({
     setCurrentIndex((prev) => Math.max(prev - 1, 0));
   };
 
+  const handleMobilePrev = () => {
+    if (viewportRef.current && mobileScrollIndex > 0) {
+      const newIndex = mobileScrollIndex - 1;
+      const scrollAmount = newIndex * (viewportRef.current.offsetWidth);
+      viewportRef.current.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+      setMobileScrollIndex(newIndex);
+    }
+  };
+
+  const handleMobileNext = () => {
+    if (viewportRef.current && mobileScrollIndex < totalCards - 1) {
+      const newIndex = mobileScrollIndex + 1;
+      const scrollAmount = newIndex * (viewportRef.current.offsetWidth);
+      viewportRef.current.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+      setMobileScrollIndex(newIndex);
+    }
+  };
+
   const trackStyle = isPinned
     ? {
         x: prefersReducedMotion ? x : smoothX,
@@ -376,45 +395,143 @@ export function CinematicHorizontalSection({
             </div>
 
             {showCarouselArrows && (
-              <div className="mt-6 flex justify-end gap-3">
-                <button
-                  type="button"
-                  onClick={handlePrev}
-                  disabled={currentIndex === 0}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-black/50 backdrop-blur transition hover:border-primary disabled:opacity-30"
-                  aria-label="Previous cards"
-                >
-                  <ChevronLeft size={18} />
-                </button>
-                <button
-                  type="button"
-                  onClick={handleNext}
-                  disabled={currentIndex === maxIndex}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-black/50 backdrop-blur transition hover:border-primary disabled:opacity-30"
-                  aria-label="Next cards"
-                >
-                  <ChevronRight size={18} />
-                </button>
+              <div className="mt-6 flex items-center justify-between">
+                {/* Pagination Dots - Absolute Center */}
+                <div className="absolute left-1/2 -translate-x-1/2 flex gap-2">
+                  {Array.from({ length: maxIndex + 1 }).map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentIndex(index)}
+                      className={`h-2 w-2 rounded-full transition-all ${
+                        index === currentIndex
+                          ? 'bg-primary ring-2 ring-primary/30 ring-offset-2 ring-offset-background'
+                          : 'bg-white/30 hover:bg-white/50'
+                      }`}
+                      aria-label={`Go to page ${index + 1}`}
+                    />
+                  ))}
+                </div>
+
+                {/* Arrows - Far Right */}
+                <div className="ml-auto flex gap-3">
+                  <button
+                    type="button"
+                    onClick={handlePrev}
+                    disabled={currentIndex === 0}
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-black/50 backdrop-blur transition hover:border-primary disabled:opacity-30"
+                    aria-label="Previous cards"
+                  >
+                    <ChevronLeft size={18} />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleNext}
+                    disabled={currentIndex === maxIndex}
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-black/50 backdrop-blur transition hover:border-primary disabled:opacity-30"
+                    aria-label="Next cards"
+                  >
+                    <ChevronRight size={18} />
+                  </button>
+                </div>
               </div>
             )}
           </div>
         ) : isMobileCarousel ? (
-          <div
-            ref={viewportRef}
-            className="w-full overflow-x-auto snap-x snap-mandatory no-scrollbar"
-            style={{ WebkitOverflowScrolling: 'touch' }}
-          >
-            <div className="flex gap-6 pl-6">
-              {renderedCards.map((child, index) => (
-                <div
-                  key={`mobile-${index}`}
-                  className="w-[calc(100vw-3rem)] flex-shrink-0 snap-center"
-                >
-                  {child}
-                </div>
-              ))}
-              <div className="w-6 flex-shrink-0" aria-hidden="true" />
+          <div className="w-full">
+            <div ref={viewportRef} className="w-full overflow-hidden">
+              <motion.div
+                ref={trackRef}
+                drag="x"
+                dragConstraints={{ left: -(viewportWidth * (totalCards - 1)), right: 0 }}
+                dragElastic={0.1}
+                onDragEnd={(_, info) => {
+                  const offset = info.offset.x;
+                  const velocity = info.velocity.x;
+                  
+                  if (Math.abs(velocity) > 500 || Math.abs(offset) > viewportWidth / 4) {
+                    if (offset > 0 && currentIndex > 0) {
+                      setCurrentIndex(currentIndex - 1);
+                    } else if (offset < 0 && currentIndex < totalCards - 1) {
+                      setCurrentIndex(currentIndex + 1);
+                    }
+                  }
+                }}
+                animate={{
+                  x: -(currentIndex * viewportWidth),
+                }}
+                transition={{
+                  type: 'spring',
+                  stiffness: 70,
+                  damping: 18,
+                  mass: 0.8,
+                }}
+                className={`flex items-stretch ${railClassName}`.trim()}
+              >
+                {renderedCards.map((child, index) => {
+                  if (!isValidElement(child)) {
+                    return child;
+                  }
+
+                  const element = child as ReactElement<{ style?: CSSProperties }>;
+
+                  return cloneElement(element, {
+                    key: `mobile-${index}`,
+                    style: {
+                      ...(element.props.style ?? {}),
+                      width: '100%',
+                      minWidth: '100%',
+                      maxWidth: '100%',
+                      flexShrink: 0,
+                      boxSizing: 'border-box',
+                      paddingInline: '24px',
+                    },
+                  });
+                })}
+              </motion.div>
             </div>
+
+            {/* Mobile Navigation - Dots and Arrows */}
+            {totalCards > 1 && (
+              <div className="mt-6 flex items-center justify-between px-6">
+                {/* Pagination Dots - Absolute Center */}
+                <div className="absolute left-1/2 -translate-x-1/2 flex gap-2">
+                  {Array.from({ length: totalCards }).map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentIndex(index)}
+                      className={`h-2 w-2 rounded-full transition-all ${
+                        index === currentIndex
+                          ? 'bg-primary ring-2 ring-primary/30 ring-offset-2 ring-offset-background'
+                          : 'bg-white/30 hover:bg-white/50'
+                      }`}
+                      aria-label={`Go to card ${index + 1}`}
+                    />
+                  ))}
+                </div>
+
+                {/* Arrows - Far Right */}
+                <div className="ml-auto flex gap-3">
+                  <button
+                    type="button"
+                    onClick={handlePrev}
+                    disabled={currentIndex === 0}
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-black/50 backdrop-blur transition hover:border-primary disabled:opacity-30"
+                    aria-label="Previous card"
+                  >
+                    <ChevronLeft size={18} />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleNext}
+                    disabled={currentIndex === totalCards - 1}
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-black/50 backdrop-blur transition hover:border-primary disabled:opacity-30"
+                    aria-label="Next card"
+                  >
+                    <ChevronRight size={18} />
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         ) : (
           <div

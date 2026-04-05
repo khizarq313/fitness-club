@@ -43,8 +43,8 @@ export function PackagesSection() {
       railClassName="items-stretch pb-6 md:pb-8"
       header={
         <div className="section-container relative z-10">
-          <div className="mb-12 flex flex-col items-start justify-between gap-8 md:mb-16 lg:mb-20 md:flex-row md:items-start md:gap-10">
-            <div>
+          <div className="mb-12 md:mb-16 lg:mb-20">
+            <div className="mb-6">
               <span className="mb-4 block font-headline text-xs uppercase tracking-[0.3em] text-primary">
                 Membership Tiers
               </span>
@@ -52,7 +52,7 @@ export function PackagesSection() {
                 Select Your Plan
               </h2>
             </div>
-            <p className="mt-4 max-w-md font-body text-sm leading-relaxed text-zinc-400 md:mt-0">
+            <p className="max-w-md font-body text-sm leading-relaxed text-zinc-400">
               Transparent pricing for premium results. Select the tier that
               matches your ambition.
             </p>

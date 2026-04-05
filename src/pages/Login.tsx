@@ -127,11 +127,12 @@ export default function Login() {
         </button>
 
         <div className="section-container max-w-lg relative z-10 flex flex-col items-center">
-        <div className="flex items-center gap-3 mb-10 border-b border-outline/30 pb-6">
-          <h1 className="font-display text-4xl uppercase tracking-wider text-on-surface">
-            Fitness <span className="text-primary">Club</span>
-          </h1>
-        </div>  <p className="text-on-surface-variant text-sm">
+          <div className="flex items-center gap-3 mb-6 border-b border-outline/30 pb-6">
+            <h1 className="font-display text-4xl uppercase tracking-wider text-on-surface">
+              Fitness <span className="text-primary">Club</span>
+            </h1>
+          </div>
+          <p className="text-on-surface-variant text-sm mb-8 text-center">
             {isLoginMode ? 'Access your elite membership.' : 'Forge your new path today.'}
           </p>
         </div>
@@ -152,7 +153,7 @@ export default function Login() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full btn-gold py-3 flex items-center justify-center gap-2 mt-4"
+            className="w-full btn-gold py-3 sm:py-3.5 flex items-center justify-center gap-2 mt-4 text-sm sm:text-base font-headline tracking-widest uppercase disabled:opacity-50"
           >
             {isSubmitting ? <Loader2 size={18} className="animate-spin" /> : (isLoginMode ? 'Login' : 'Create Account')}
           </button>
