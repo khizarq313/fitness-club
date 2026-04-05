@@ -215,7 +215,6 @@ export function CinematicHorizontalSection({
   const [isMobileCarousel, setIsMobileCarousel] = useState(false);
   const [cardsPerView, setCardsPerView] = useState(3);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [mobileScrollIndex, setMobileScrollIndex] = useState(0);
   const isInView = useInView(sectionRef, { once: true, margin: '-15%' });
   const { scrollYProgress } = useScroll({
     target: sectionRef,
