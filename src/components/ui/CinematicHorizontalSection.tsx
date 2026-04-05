@@ -322,24 +322,6 @@ export function CinematicHorizontalSection({
     setCurrentIndex((prev) => Math.max(prev - 1, 0));
   };
 
-  const handleMobilePrev = () => {
-    if (viewportRef.current && mobileScrollIndex > 0) {
-      const newIndex = mobileScrollIndex - 1;
-      const scrollAmount = newIndex * (viewportRef.current.offsetWidth);
-      viewportRef.current.scrollTo({ left: scrollAmount, behavior: 'smooth' });
-      setMobileScrollIndex(newIndex);
-    }
-  };
-
-  const handleMobileNext = () => {
-    if (viewportRef.current && mobileScrollIndex < totalCards - 1) {
-      const newIndex = mobileScrollIndex + 1;
-      const scrollAmount = newIndex * (viewportRef.current.offsetWidth);
-      viewportRef.current.scrollTo({ left: scrollAmount, behavior: 'smooth' });
-      setMobileScrollIndex(newIndex);
-    }
-  };
-
   const trackStyle = isPinned
     ? {
         x: prefersReducedMotion ? x : smoothX,
