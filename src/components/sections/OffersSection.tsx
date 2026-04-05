@@ -44,7 +44,7 @@ export function OffersSection() {
       id="offers"
       desktopBehavior="carousel"
       sectionClassName="bg-background border-y border-outline/30"
-      railClassName="pb-4 md:pb-6"
+      railClassName="items-stretch pb-4 md:pb-6"
       header={
         <div className="section-container">
           <SectionHeading

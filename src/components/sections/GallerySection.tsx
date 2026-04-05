@@ -62,6 +62,7 @@ export function GallerySection() {
     <>
       <CinematicHorizontalSection
         id="facilities"
+        desktopBehavior="carousel"
         sectionClassName="bg-background"
         railClassName="items-stretch pb-4 md:pb-6"
         header={
@@ -101,14 +102,8 @@ export function GallerySection() {
               isPinned={isPinned}
               isInView={isInView}
               prefersReducedMotion={reduceMotionForCards}
-              outerClassName="flex-none w-[320px] max-w-[85vw] snap-start md:w-[360px] lg:w-[380px]"
-              innerClassName={`group relative overflow-hidden rounded-sm border border-white/10 bg-surface shadow-[0_10px_30px_rgba(0,0,0,0.3)] ${
-                index % 3 === 0
-                  ? 'aspect-[4/5]'
-                  : index % 3 === 1
-                    ? 'aspect-[5/4]'
-                    : 'aspect-[3/4]'
-              }`}
+              outerClassName="w-full flex-shrink-0"
+              innerClassName="group relative h-full overflow-hidden rounded-sm border border-white/10 bg-surface shadow-[0_10px_30px_rgba(0,0,0,0.3)] aspect-[4/5] md:aspect-[3/4] md:max-h-[500px] lg:max-h-[550px]"
               hoverScale={1.02}
               onClick={() => setSelectedImage(img)}
             >

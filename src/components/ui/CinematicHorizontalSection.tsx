@@ -273,6 +273,7 @@ export function CinematicHorizontalSection({
   const totalCards = renderedCards.length;
   const effectiveCardsPerView = Math.min(Math.max(totalCards, 1), cardsPerView);
   const maxIndex = Math.max(0, totalCards - effectiveCardsPerView);
+  const shouldCenterCards = isDesktopCarousel && !isMobile && totalCards < cardsPerView;
   const desktopStep =
     effectiveCardsPerView > 0 ? viewportWidth / effectiveCardsPerView : 0;
   const desktopCarouselCardStyle: CSSProperties | undefined =
@@ -355,21 +356,23 @@ export function CinematicHorizontalSection({
         {isDesktopCarousel ? (
           <div className="w-full">
             <div ref={viewportRef} className="w-full overflow-hidden">
-              <motion.div
-                ref={trackRef}
-                animate={{
-                  x: -(currentIndex * desktopStep),
-                }}
-                transition={{
-                  type: 'spring',
-                  stiffness: 70,
-                  damping: 18,
-                  mass: 0.8,
-                }}
-                className={`flex items-stretch ${railClassName}`.trim()}
-              >
-                {desktopCarouselCards}
-              </motion.div>
+              <div className={shouldCenterCards ? 'flex justify-center w-full' : ''}>
+                <motion.div
+                  ref={trackRef}
+                  animate={{
+                    x: shouldCenterCards ? 0 : -(currentIndex * desktopStep),
+                  }}
+                  transition={{
+                    type: 'spring',
+                    stiffness: 70,
+                    damping: 18,
+                    mass: 0.8,
+                  }}
+                  className={`flex items-stretch ${railClassName}`.trim()}
+                >
+                  {desktopCarouselCards}
+                </motion.div>
+              </div>
             </div>
 
             {showCarouselArrows && (
@@ -401,7 +404,7 @@ export function CinematicHorizontalSection({
             className="w-full overflow-x-auto snap-x snap-mandatory no-scrollbar"
             style={{ WebkitOverflowScrolling: 'touch' }}
           >
-            <div className="flex gap-6 px-6">
+            <div className="flex gap-6 pl-6">
               {renderedCards.map((child, index) => (
                 <div
                   key={`mobile-${index}`}
@@ -410,6 +413,7 @@ export function CinematicHorizontalSection({
                   {child}
                 </div>
               ))}
+              <div className="w-6 flex-shrink-0" aria-hidden="true" />
             </div>
           </div>
         ) : (

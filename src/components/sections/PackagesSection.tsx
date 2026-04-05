@@ -40,7 +40,7 @@ export function PackagesSection() {
       desktopBehavior="carousel"
       sectionClassName="bg-surface"
       contentClassName="w-full py-20 md:py-28 lg:py-32"
-      railClassName="pb-6 md:pb-8"
+      railClassName="items-stretch pb-6 md:pb-8"
       header={
         <div className="section-container relative z-10">
           <div className="mb-12 flex flex-col items-start justify-between gap-8 md:mb-16 lg:mb-20 md:flex-row md:items-start md:gap-10">

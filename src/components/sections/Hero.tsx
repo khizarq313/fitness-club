@@ -97,7 +97,7 @@ export function Hero() {
       >
         {/* Eyebrow */}
         <motion.p
-          className="font-headline text-xs md:text-sm uppercase tracking-[0.3em] text-on-surface-variant mb-4 md:mb-6"
+          className="font-headline text-xs md:text-sm uppercase tracking-[0.3em] text-on-surface-variant"
           variants={itemVariants}
         >
           The Elite Performance Sanctuary

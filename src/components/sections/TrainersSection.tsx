@@ -19,7 +19,7 @@ export function TrainersSection() {
       id="coaches"
       desktopBehavior="carousel"
       sectionClassName="bg-background"
-      railClassName="pb-4 md:pb-6"
+      railClassName="items-stretch pb-4 md:pb-6"
       header={
         <div className="section-container">
           <div className="mb-12 md:mb-16 lg:mb-20">
