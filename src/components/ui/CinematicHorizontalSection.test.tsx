@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { render, screen, within } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { CinematicHorizontalSection } from './CinematicHorizontalSection';
 
 /**
@@ -146,7 +146,7 @@ describe('CinematicHorizontalSection - Bug Condition Exploration', () => {
         value: width,
       });
 
-      const { container } = render(
+      render(
         <CinematicHorizontalSection
           id="test-section"
           desktopBehavior="carousel"
@@ -352,7 +352,7 @@ describe('CinematicHorizontalSection - Preservation Property Tests', () => {
       { width: 1024, expectedCards: 3, device: 'Desktop' },
       { width: 1280, expectedCards: 3, device: 'Large Desktop' },
       { width: 1920, expectedCards: 3, device: 'Full HD' },
-    ])('should display $expectedCards cards at $width px ($device)', ({ width, expectedCards }) => {
+    ])('should display $expectedCards cards at $width px ($device)', ({ width }) => {
       // Set viewport width
       Object.defineProperty(window, 'innerWidth', {
         writable: true,
